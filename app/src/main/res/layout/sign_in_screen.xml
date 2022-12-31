@@ -144,13 +144,30 @@
 
     <ImageView
         android:id="@+id/signin_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="164dp"
+        android:layout_height="35dp"
         android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/rectangle_3"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_3"
         app:srcCompat="@drawable/sign_in" />
+
+    <TextView
+        android:id="@+id/register_button_text"
+        android:layout_width="127dp"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="center_horizontal|top"
+        android:text="Зареєструватись!"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/signin_button"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+        app:layout_constraintTop_toTopOf="@+id/signin_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
