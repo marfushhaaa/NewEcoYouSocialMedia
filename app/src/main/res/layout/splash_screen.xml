@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/splash_screen_bg"
+        android:layout_width="467dp"
+        android:layout_height="936dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/garden_1818234_1920_1" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/splash_screen_bg"
+        app:layout_constraintEnd_toEndOf="@+id/splash_screen_bg"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/splash_screen_bg"
+        app:layout_constraintTop_toTopOf="@+id/splash_screen_bg"
+        app:srcCompat="@drawable/black" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="289dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.281"
+        app:srcCompat="@drawable/black_2" />
+
+    <TextView
+        android:id="@+id/eco_you"
+        android:layout_width="262dp"
+        android:layout_height="58dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="113dp"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="center_horizontal|top"
+        android:text="Eco You"
+        android:textAppearance="@style/eco_you"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/some_id"
+        android:layout_width="177dp"
+        android:layout_height="87dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="101dp"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="center_horizontal|top"
+        android:text="Разом ми - сила"
+        android:textAppearance="@style/some_id"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/eco_you" />
+
+    <View
+        android:id="@+id/rectangle_1"
+        android:layout_width="119.61dp"
+        android:layout_height="34dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/sign_in"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/some_id" />
+
+    <View
+        android:id="@+id/register_button"
+        android:layout_width="119.61dp"
+        android:layout_height="34dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/create_an_acc"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/rectangle_1"
+        app:layout_constraintTop_toBottomOf="@+id/some_id" />
+
+    <TextView
+        android:id="@+id/some_id2"
+        android:layout_width="87dp"
+        android:layout_height="23dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="7dp"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="top"
+        android:text="Вхід"
+        android:textAlignment="center"
+        android:textAppearance="@style/some_id2"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
+
+    <TextView
+        android:id="@+id/some_id3"
+        android:layout_width="111dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="7dp"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="top"
+        android:text="Реєстрація"
+        android:textAlignment="center"
+        android:textAppearance="@style/some_id2"
+        app:layout_constraintBottom_toBottomOf="@+id/register_button"
+        app:layout_constraintEnd_toEndOf="@+id/register_button"
+        app:layout_constraintStart_toStartOf="@+id/register_button"
+        app:layout_constraintTop_toTopOf="@+id/register_button" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

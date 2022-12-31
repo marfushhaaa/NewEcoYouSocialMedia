@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="467dp"
+        android:layout_height="969dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/garden_1818234_1920_1" />
+
+    <View
+        android:id="@+id/rectangle_3"
+        android:layout_width="323dp"
+        android:layout_height="479dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="126dp"
+        android:layout_marginBottom="451dp"
+        android:background="@drawable/rectangle_3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="232dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="79dp"
+        android:ems="10"
+        android:maxEms="15"
+        android:minEms="2"
+        android:fontFamily="@font/lato_light"
+        android:hint="Напиши своє ім'я :)"
+        android:inputType="textPersonName"
+        android:textColor="#BEFFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
+        app:layout_constraintVertical_bias="0.224" />
+
+    <TextView
+        android:id="@+id/some_id"
+        android:layout_width="299dp"
+        android:layout_height="54dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="90dp"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="center_horizontal|top"
+        android:text="Давай реєструватись!"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="238dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:minEms="10"
+        android:maxEms="20"
+        android:fontFamily="@font/lato_light"
+        android:hint="І свій імейл!"
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="241dp"
+        android:layout_height="52dp"
+        android:ems="10"
+        android:minEms="8"
+        android:maxEms="20"
+        android:fontFamily="@font/lato_light"
+        android:hint="Також придумай пароль"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintVertical_bias="0.066" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonnickName"
+        android:layout_width="232dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="79dp"
+        android:ems="10"
+        android:fontFamily="@font/lato_light"
+        android:hint="Напиши свій нік "
+        android:inputType="textPersonName"
+        android:maxEms="15"
+        android:minEms="2"
+        android:textColor="#BEFFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
+        app:layout_constraintVertical_bias="0.76" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonBIo"
+        android:layout_width="232dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="79dp"
+        android:ems="10"
+        android:fontFamily="@font/lato_light"
+        android:hint="Напиши щось про себе"
+        android:inputType="textPersonName"
+        android:maxEms="15"
+        android:minEms="2"
+        android:textColor="#BEFFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
+        app:layout_constraintVertical_bias="0.942" />
+
+    <ImageView
+        android:id="@+id/signin_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_3"
+        app:srcCompat="@drawable/sign_in" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
