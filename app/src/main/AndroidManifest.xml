@@ -29,6 +29,12 @@
         <activity android:name=".UserProfileActivity"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".SearchTeamActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".CreateTeamActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 

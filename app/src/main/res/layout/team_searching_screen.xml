@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <View
+        android:id="@+id/create_a_team"
+        android:layout_width="232dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/rectangle_6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/add_icon"
+        android:layout_width="17.33dp"
+        android:layout_height="17.33dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/add_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/create_a_team"
+        app:layout_constraintEnd_toEndOf="@+id/create_a_team"
+        app:layout_constraintStart_toStartOf="@+id/create_a_team"
+        app:layout_constraintTop_toTopOf="@+id/create_a_team" />
+
+    <TextView
+        android:id="@+id/some_id"
+        android:layout_width="215dp"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="center_horizontal|top"
+        android:text="Створити свою команду"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#1E5128"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/create_a_team"
+        app:layout_constraintEnd_toEndOf="@+id/create_a_team"
+        app:layout_constraintStart_toStartOf="@+id/create_a_team"
+        app:layout_constraintTop_toBottomOf="@+id/add_icon" />
+
+    <ScrollView
+        android:id="@+id/scroll_view_searching_teams"
+        android:layout_width="434dp"
+        android:layout_height="753dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_a_team">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/lato_regular"
+                android:text="Схоже, що немає ні одної команди :( Створіть першу і запросіть друзів!"
+                android:textColor="#1E5128"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
