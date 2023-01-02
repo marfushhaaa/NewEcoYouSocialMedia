@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
-    View registerbutt;
+    View registerbutt, loginbutt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +29,17 @@ public class SplashScreen extends AppCompatActivity {
             }
         });
 
+
+        loginbutt = findViewById(R.id.login_butt);
+        loginbutt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SplashScreen.this,  LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
+        });
     }
 
 

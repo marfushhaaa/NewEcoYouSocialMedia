@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/eco_you" />
 
     <View
-        android:id="@+id/rectangle_1"
+        android:id="@+id/login_butt"
         android:layout_width="119.61dp"
         android:layout_height="34dp"
         android:layout_alignParentLeft="true"
@@ -94,7 +94,7 @@
         android:layout_marginEnd="25dp"
         android:background="@drawable/create_an_acc"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/rectangle_1"
+        app:layout_constraintStart_toEndOf="@+id/login_butt"
         app:layout_constraintTop_toBottomOf="@+id/some_id" />
 
     <TextView
@@ -110,10 +110,10 @@
         android:text="Вхід"
         android:textAlignment="center"
         android:textAppearance="@style/some_id2"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
+        app:layout_constraintBottom_toBottomOf="@+id/login_butt"
+        app:layout_constraintEnd_toEndOf="@+id/login_butt"
+        app:layout_constraintStart_toStartOf="@+id/login_butt"
+        app:layout_constraintTop_toTopOf="@+id/login_butt" />
 
     <TextView
         android:id="@+id/some_id3"
