@@ -17,11 +17,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
     FirebaseAuth mAuth;
     EditText editTextName, editTextNickname, editTextBio, editTextPassword, editTextEmail;
-    ImageView signInButton;
+    ImageView signUpButton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +35,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editTextPassword = findViewById(R.id.editTextTextPassword);
         editTextEmail = findViewById(R.id.editTextTextEmailAddress);
 
-        signInButton = findViewById(R.id.signin_button);
-        signInButton.setOnClickListener(this);
+        signUpButton = findViewById(R.id.signin_button);
+        signUpButton.setOnClickListener(this);
 
 
     }
@@ -104,7 +104,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-                            User user = new User(name, nickname, bio, email);
+                            User user = new User(name, nickname, email, bio);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

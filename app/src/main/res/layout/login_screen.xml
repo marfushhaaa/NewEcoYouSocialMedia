@@ -71,14 +71,14 @@
         app:layout_constraintVertical_bias="0.066" />
 
     <EditText
-        android:id="@+id/editTextTextPersonnickNameLogin"
+        android:id="@+id/editTextTextPersonEmail"
         android:layout_width="232dp"
         android:layout_height="53dp"
         android:layout_marginTop="79dp"
         android:ems="10"
         android:fontFamily="@font/lato_light"
-        android:hint="Напиши свій нік "
-        android:inputType="textPersonName"
+        android:hint="Напиши свій імейл"
+        android:inputType="textEmailAddress"
         android:maxEms="15"
         android:minEms="2"
         android:textColor="#BEFFFFFF"
