@@ -1,0 +1,27 @@
+socialmedia/prosperity/newecosocialmedia/User.java
+ socialmedia.prosperity.newecosocialmedia.User
+socialmedia/prosperity/newecosocialmedia/BuildConfig.java
+ socialmedia.prosperity.newecosocialmedia.BuildConfig
+socialmedia/prosperity/newecosocialmedia/UserProfileActivity.java
+ socialmedia.prosperity.newecosocialmedia.UserProfileActivity
+socialmedia/prosperity/newecosocialmedia/Team.java
+ socialmedia.prosperity.newecosocialmedia.Team
+socialmedia/prosperity/newecosocialmedia/SplashScreen.java
+ socialmedia.prosperity.newecosocialmedia.SplashScreen
+ socialmedia.prosperity.newecosocialmedia.SplashScreen$1
+ socialmedia.prosperity.newecosocialmedia.SplashScreen$2
+socialmedia/prosperity/newecosocialmedia/SignUpActivity.java
+ socialmedia.prosperity.newecosocialmedia.SignUpActivity
+ socialmedia.prosperity.newecosocialmedia.SignUpActivity$1
+ socialmedia.prosperity.newecosocialmedia.SignUpActivity$1$1
+socialmedia/prosperity/newecosocialmedia/FirebaseRecyckerAdapter.java
+ socialmedia.prosperity.newecosocialmedia.FirebaseRecyckerAdapter
+ socialmedia.prosperity.newecosocialmedia.FirebaseRecyckerAdapter$ViewHolder
+socialmedia/prosperity/newecosocialmedia/CreateTeamActivity.java
+ socialmedia.prosperity.newecosocialmedia.CreateTeamActivity
+ socialmedia.prosperity.newecosocialmedia.CreateTeamActivity$1
+socialmedia/prosperity/newecosocialmedia/SearchTeamActivity.java
+ socialmedia.prosperity.newecosocialmedia.SearchTeamActivity
+socialmedia/prosperity/newecosocialmedia/LoginActivity.java
+ socialmedia.prosperity.newecosocialmedia.LoginActivity
+ socialmedia.prosperity.newecosocialmedia.LoginActivity$1

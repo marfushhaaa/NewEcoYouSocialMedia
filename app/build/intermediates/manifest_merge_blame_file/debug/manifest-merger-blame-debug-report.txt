@@ -1,0 +1,235 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="socialmedia.prosperity.newecosocialmedia"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:4:1-62
+11-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:4:18-60
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:24:5-79
+12-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:24:22-76
+13
+14    <application
+14-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:5:5-38:19
+15        android:allowBackup="true"
+15-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:6:9-35
+16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+16-->[androidx.core:core:1.8.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\66d2d06a1c417e1a424fb10f7c64947e\core-1.8.0\AndroidManifest.xml:24:18-86
+17        android:debuggable="true"
+18        android:extractNativeLibs="false"
+19        android:icon="@mipmap/ic_launcher"
+19-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:7:9-43
+20        android:label="@string/app_name"
+20-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:8:9-41
+21        android:roundIcon="@mipmap/ic_launcher_round"
+21-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:9:9-54
+22        android:supportsRtl="true"
+22-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:10:9-35
+23        android:testOnly="true"
+24        android:theme="@style/Theme.NewEcoSocialMedia" >
+24-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:12:9-55
+25        <activity
+25-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:13:9-22:20
+26            android:name="socialmedia.prosperity.newecosocialmedia.SplashScreen"
+26-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:13:19-47
+27            android:exported="true"
+27-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:15:13-36
+28            android:screenOrientation="portrait" >
+28-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:14:13-49
+29            <intent-filter>
+29-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:16:13-21:29
+30
+31                <!-- MAIN represents that it is the Main Activity -->
+32                <action android:name="android.intent.action.MAIN" />
+32-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:18:17-69
+32-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:18:25-66
+33                <!-- Launcher Denotes that it will be the first launching activity -->
+34                <category android:name="android.intent.category.LAUNCHER" />
+34-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:20:17-77
+34-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:20:27-74
+35            </intent-filter>
+36        </activity>
+37        <activity
+37-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:23:9-25:15
+38            android:name="socialmedia.prosperity.newecosocialmedia.SignUpActivity"
+38-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:23:19-49
+39            android:screenOrientation="portrait" />
+39-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:24:13-49
+40        <activity
+40-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:26:9-28:15
+41            android:name="socialmedia.prosperity.newecosocialmedia.LoginActivity"
+41-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:26:19-48
+42            android:screenOrientation="portrait" />
+42-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:27:13-49
+43        <activity
+43-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:29:9-31:15
+44            android:name="socialmedia.prosperity.newecosocialmedia.UserProfileActivity"
+44-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:29:19-54
+45            android:screenOrientation="portrait" />
+45-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:30:13-49
+46        <activity
+46-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:32:9-34:15
+47            android:name="socialmedia.prosperity.newecosocialmedia.SearchTeamActivity"
+47-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:32:19-53
+48            android:screenOrientation="portrait" />
+48-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:33:13-49
+49        <activity
+49-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:35:9-37:15
+50            android:name="socialmedia.prosperity.newecosocialmedia.CreateTeamActivity"
+50-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:35:19-53
+51            android:screenOrientation="portrait" />
+51-->D:\Marfuushaaa\NewEcoSocialMedia\app\src\main\AndroidManifest.xml:36:13-49
+52        <activity
+52-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:27:9-44:20
+53            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+53-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:28:13-80
+54            android:excludeFromRecents="true"
+54-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:29:13-46
+55            android:exported="true"
+55-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:30:13-36
+56            android:launchMode="singleTask"
+56-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:31:13-44
+57            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+57-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:32:13-72
+58            <intent-filter>
+58-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:33:13-43:29
+59                <action android:name="android.intent.action.VIEW" />
+59-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:34:17-69
+59-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:34:25-66
+60
+61                <category android:name="android.intent.category.DEFAULT" />
+61-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:36:17-76
+61-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:36:27-73
+62                <category android:name="android.intent.category.BROWSABLE" />
+62-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:37:17-78
+62-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:37:27-75
+63
+64                <data
+64-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:39:17-42:51
+65                    android:host="firebase.auth"
+65-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:40:21-49
+66                    android:path="/"
+66-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:41:21-37
+67                    android:scheme="genericidp" />
+67-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:42:21-48
+68            </intent-filter>
+69        </activity>
+70        <activity
+70-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:45:9-62:20
+71            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+71-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:46:13-79
+72            android:excludeFromRecents="true"
+72-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:47:13-46
+73            android:exported="true"
+73-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:48:13-36
+74            android:launchMode="singleTask"
+74-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:49:13-44
+75            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+75-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:50:13-72
+76            <intent-filter>
+76-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:51:13-61:29
+77                <action android:name="android.intent.action.VIEW" />
+77-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:34:17-69
+77-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:34:25-66
+78
+79                <category android:name="android.intent.category.DEFAULT" />
+79-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:36:17-76
+79-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:36:27-73
+80                <category android:name="android.intent.category.BROWSABLE" />
+80-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:37:17-78
+80-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:37:27-75
+81
+82                <data
+82-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:39:17-42:51
+83                    android:host="firebase.auth"
+83-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:40:21-49
+84                    android:path="/"
+84-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:41:21-37
+85                    android:scheme="recaptcha" />
+85-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:42:21-48
+86            </intent-filter>
+87        </activity>
+88
+89        <service
+89-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:64:9-70:19
+90            android:name="com.google.firebase.components.ComponentDiscoveryService"
+90-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:65:13-84
+91            android:directBootAware="true"
+91-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\1e19476433086ef3ae5d1e211075f239\jetified-firebase-common-20.2.0\AndroidManifest.xml:34:13-43
+92            android:exported="false" >
+92-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:66:13-37
+93            <meta-data
+93-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:67:13-69:85
+94                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+94-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:68:17-109
+95                android:value="com.google.firebase.components.ComponentRegistrar" />
+95-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\361914ae6ea4fa64ed49a3a4c916c0fd\jetified-firebase-auth-21.1.0\AndroidManifest.xml:69:17-82
+96            <meta-data
+96-->[com.google.firebase:firebase-database:20.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\0a0e4a80b5bd89e099517b3dfd9fb4ef\jetified-firebase-database-20.1.0\AndroidManifest.xml:31:13-33:85
+97                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+97-->[com.google.firebase:firebase-database:20.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\0a0e4a80b5bd89e099517b3dfd9fb4ef\jetified-firebase-database-20.1.0\AndroidManifest.xml:32:17-109
+98                android:value="com.google.firebase.components.ComponentRegistrar" />
+98-->[com.google.firebase:firebase-database:20.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\0a0e4a80b5bd89e099517b3dfd9fb4ef\jetified-firebase-database-20.1.0\AndroidManifest.xml:33:17-82
+99        </service>
+100
+101        <provider
+101-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\1e19476433086ef3ae5d1e211075f239\jetified-firebase-common-20.2.0\AndroidManifest.xml:25:9-30:39
+102            android:name="com.google.firebase.provider.FirebaseInitProvider"
+102-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\1e19476433086ef3ae5d1e211075f239\jetified-firebase-common-20.2.0\AndroidManifest.xml:26:13-77
+103            android:authorities="socialmedia.prosperity.newecosocialmedia.firebaseinitprovider"
+103-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\1e19476433086ef3ae5d1e211075f239\jetified-firebase-common-20.2.0\AndroidManifest.xml:27:13-72
+104            android:directBootAware="true"
+104-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\1e19476433086ef3ae5d1e211075f239\jetified-firebase-common-20.2.0\AndroidManifest.xml:28:13-43
+105            android:exported="false"
+105-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\1e19476433086ef3ae5d1e211075f239\jetified-firebase-common-20.2.0\AndroidManifest.xml:29:13-37
+106            android:initOrder="100" />
+106-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\1e19476433086ef3ae5d1e211075f239\jetified-firebase-common-20.2.0\AndroidManifest.xml:30:13-36
+107
+108        <activity
+108-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\37b595b2d2745886dcd0edc0a5df4b65\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+109            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+109-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\37b595b2d2745886dcd0edc0a5df4b65\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+110            android:exported="false"
+110-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\37b595b2d2745886dcd0edc0a5df4b65\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+111            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+111-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\37b595b2d2745886dcd0edc0a5df4b65\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+112
+113        <meta-data
+113-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\711f4faa02f0398d40641bd0fddd36d1\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+114            android:name="com.google.android.gms.version"
+114-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\711f4faa02f0398d40641bd0fddd36d1\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+115            android:value="@integer/google_play_services_version" />
+115-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\711f4faa02f0398d40641bd0fddd36d1\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+116
+117        <provider
+117-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\4be41130de291653fa6e51f76f0897c8\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+118            android:name="androidx.startup.InitializationProvider"
+118-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\4be41130de291653fa6e51f76f0897c8\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+119            android:authorities="socialmedia.prosperity.newecosocialmedia.androidx-startup"
+119-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\4be41130de291653fa6e51f76f0897c8\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+120            android:exported="false" >
+120-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\4be41130de291653fa6e51f76f0897c8\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+121            <meta-data
+121-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\4be41130de291653fa6e51f76f0897c8\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+122                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+122-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\4be41130de291653fa6e51f76f0897c8\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+123                android:value="androidx.startup" />
+123-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\4be41130de291653fa6e51f76f0897c8\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+124            <meta-data
+124-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\811af8e8e31fae2e250246e68297a9cd\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+125                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+125-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\811af8e8e31fae2e250246e68297a9cd\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+126                android:value="androidx.startup" />
+126-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Marfushhaaa\gradle\caches\transforms-2\files-2.1\811af8e8e31fae2e250246e68297a9cd\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+127        </provider>
+128    </application>
+129
+130</manifest>
