@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "477271908488",
+    "firebase_url": "https://ecoyou-social-media-default-rtdb.firebaseio.com",
+    "project_id": "ecoyou-social-media",
+    "storage_bucket": "ecoyou-social-media.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477271908488:android:c6f59c3cfde7cd4ccb3f3d",
+        "android_client_info": {
+          "package_name": "socialmedia.prosperity.newecosocialmedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477271908488-aosc8dnt1jcf8elosgfmltulkqb81u3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPGYz3dDKCu3NNW2SGiRr9uJMFFExPrSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477271908488-aosc8dnt1jcf8elosgfmltulkqb81u3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
