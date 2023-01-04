@@ -1,8 +1,4 @@
 package socialmedia.prosperity.newecosocialmedia;
-
-import com.google.firebase.database.IgnoreExtraProperties;
-
-@IgnoreExtraProperties
 public class Team {
     String name, bio, hash, membernumber;
 

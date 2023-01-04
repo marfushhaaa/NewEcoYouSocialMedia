@@ -81,7 +81,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
         }
         Team team = new Team(name, bio, hashtag, memberNum);
         FirebaseDatabase.getInstance().getReference("Teams")
-                .child(FirebaseAuth.getInstance().getUid())
+                .push()
                 .setValue(team).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
