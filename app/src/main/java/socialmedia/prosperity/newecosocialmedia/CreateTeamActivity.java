@@ -14,7 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -55,6 +60,8 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
         String hashtag = editTextHashtag.getText().toString().trim();
         String memberNum = editTextMemberNumber.getText().toString().trim();
         String bio = editTextBio.getText().toString().trim();
+        String dateCreation = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
+//        String totalMemberNum = "";
 
         if (name.isEmpty()) {
             editTextName.setError("Write your name!");
@@ -79,7 +86,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
             editTextBio.requestFocus();
             return;
         }
-        Team team = new Team(name, bio, hashtag, memberNum);
+        Team team = new Team(name, bio, hashtag, memberNum, dateCreation);
         FirebaseDatabase.getInstance().getReference("Teams")
                 .push()
                 .setValue(team).addOnCompleteListener(new OnCompleteListener<Void>() {

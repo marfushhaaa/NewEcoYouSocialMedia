@@ -23,6 +23,8 @@ public class FirebaseRecyckerAdapter extends FirebaseRecyclerAdapter<Team, Fireb
         holder.bio.setText(model.getBio());
         holder.hashtag.setText(model.getHash());
         holder.membernumber.setText(model.getMembernumber());
+        holder.dateCreation.setText(model.getDateCreated());
+//        holder.teamPlaces.setText(model.getTotalMembers());
     }
 
     @NonNull
@@ -33,13 +35,15 @@ public class FirebaseRecyckerAdapter extends FirebaseRecyclerAdapter<Team, Fireb
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView name, bio, hashtag, membernumber;
+        TextView name, bio, hashtag, membernumber, dateCreation, teamPlaces;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.team_name);
             bio = itemView.findViewById(R.id.team_bio);
             hashtag = itemView.findViewById(R.id.team_hash);
             membernumber = itemView.findViewById(R.id.team_members_number);
+            dateCreation = itemView.findViewById(R.id.team_date_creation);
+//            teamPlaces = itemView.findViewById(R.id.team_places);
         }
     }
 }

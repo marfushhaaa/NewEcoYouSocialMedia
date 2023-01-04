@@ -13,39 +13,29 @@
             android:layout_width="match_parent"
             android:layout_height="203dp"
             android:gravity="center">
+
             <View
                 android:id="@+id/rectangle_5"
                 android:layout_width="315dp"
                 android:layout_height="165dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:layout_marginStart="20dp"
                 android:background="@drawable/rectangle_5"
                 android:elevation="9dp"
                 android:gravity="center" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linearl"
-                android:layout_alignStart="@+id/rectangle_5"
+            <View
+                android:id="@+id/rectangle_6"
+                android:layout_width="99dp"
+                android:layout_height="30dp"
                 android:layout_alignEnd="@+id/rectangle_5"
                 android:layout_alignBottom="@+id/rectangle_5"
-                android:layout_marginStart="118dp"
-                android:layout_marginTop="-4dp"
-                android:layout_marginEnd="46dp"
-                android:layout_marginBottom="4dp">
-
-                <View
-                    android:id="@+id/rectangle_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/request_in_team_button"
-                    android:elevation="9dp"
-                    android:visibility="visible" />
-
-
-            </RelativeLayout>
+                android:layout_marginEnd="89dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/request_in_team_button"
+                android:elevation="9dp"
+                android:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/linearl"

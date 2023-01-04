@@ -1,15 +1,42 @@
 package socialmedia.prosperity.newecosocialmedia;
 public class Team {
-    String name, bio, hash, membernumber;
+    String name, bio, hash, membernumber, dateCreated;
+//    int totalMemberNumber;
+//
+//    public int getTotalMemberNumber() {
+//        return totalMemberNumber;
+//    }
+//
+//    public void setTotalMemberNumber(int totalMemberNumber) {
+//        this.totalMemberNumber = totalMemberNumber;
+//    }
 
     Team(){
 
     }
-    public Team(String name, String bio, String hash, String membernumber) {
+    public Team(String name, String bio, String hash, String membernumber, String dateCreated) {
         this.name = name;
         this.bio = bio;
         this.hash = hash;
         this.membernumber = membernumber;
+//        this.totalMembers = totalMembers;
+        this.dateCreated = dateCreated;
+    }
+//
+//    public String getTotalMembers() {
+//        return totalMembers;
+//    }
+//
+//    public void setTotalMembers(String totalMembers) {
+//        this.totalMembers = totalMembers;
+//    }
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getName() {
