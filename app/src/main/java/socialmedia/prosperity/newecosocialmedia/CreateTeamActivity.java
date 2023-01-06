@@ -58,7 +58,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
     private void registerTeam() {
         String name = editTextName.getText().toString().trim();
         String hashtag = editTextHashtag.getText().toString().trim();
-        String memberNum = editTextMemberNumber.getText().toString().trim();
+        String memberNum = ": " + editTextMemberNumber.getText().toString().trim();
         String bio = editTextBio.getText().toString().trim();
         String dateCreation = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
 //        String totalMemberNum = "";
