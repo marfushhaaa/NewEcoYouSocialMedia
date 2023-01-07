@@ -1,9 +1,13 @@
 package socialmedia.prosperity.newecosocialmedia;
 
+import android.content.Intent;
+import android.telecom.Call;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +17,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class FirebaseRecyckerAdapter extends FirebaseRecyclerAdapter<Team, FirebaseRecyckerAdapter.ViewHolder> {
 
+
     public FirebaseRecyckerAdapter(@NonNull FirebaseRecyclerOptions<Team> options) {
         super(options);
     }
@@ -21,11 +26,20 @@ public class FirebaseRecyckerAdapter extends FirebaseRecyclerAdapter<Team, Fireb
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Team model) {
         holder.name.setText(model.getName());
         holder.bio.setText(model.getBio());
-        holder.hashtag.setText(model.getShortBio());
+        holder.shortBio.setText(model.getShortBio());
         holder.membernumber.setText(model.getMembernumber());
         holder.dateCreation.setText(model.getDateCreated());
+       holder. joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String unique_team_id = getRef(position).getKey();
+                Log.d("brainfuck", "Click" + unique_team_id);
+
+            }
+        });
 //        holder.teamPlaces.setText(model.getTotalMembers());
     }
+
 
     @NonNull
     @Override
@@ -33,16 +47,21 @@ public class FirebaseRecyckerAdapter extends FirebaseRecyclerAdapter<Team, Fireb
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.team_item, parent, false);
         return new ViewHolder(view);
     }
+    public void loadAnActivity(){
 
+    }
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView name, bio, hashtag, membernumber, dateCreation, teamPlaces;
+        TextView name, bio, shortBio, membernumber, dateCreation, teamPlaces;
+        View joinButton;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.team_name);
             bio = itemView.findViewById(R.id.team_bio);
-            hashtag = itemView.findViewById(R.id.team_hash);
+            shortBio = itemView.findViewById(R.id.team_hash);
             membernumber = itemView.findViewById(R.id.team_members_number);
             dateCreation = itemView.findViewById(R.id.team_date_creation);
+            joinButton = itemView.findViewById(R.id.join_team_button);
+
 //            teamPlaces = itemView.findViewById(R.id.team_places);
         }
     }
