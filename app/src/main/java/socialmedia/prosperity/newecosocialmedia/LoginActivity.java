@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText editTextEmail, editTextPassword;
-    ImageView login_button;
+    ImageView login_button, back_button;
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +28,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         login_button = findViewById(R.id.login_button);
         login_button.setOnClickListener(this);
+
+        back_button = findViewById(R.id.back_button_login);
+        back_button.setOnClickListener(this);
 
         editTextEmail = findViewById(R.id.editTextTextPersonEmail);
         editTextPassword = findViewById(R.id.editTextTextPasswordLogin);
@@ -41,9 +44,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.login_button:
                 userLogin();
                 break;
+            case R.id.back_button_login:
+                back();
+                break;
         }
     }
-
+    private void back(){
+        Intent intent = new Intent(LoginActivity.this,  SplashScreen.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
+    }
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();

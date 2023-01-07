@@ -15,10 +15,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/garden_1818234_1920_1" />
+        app:srcCompat="@drawable/garden1818234_1920_2" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/rectangle_3"
+            android:layout_width="wrap_content"
+            android:layout_height="376dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="177dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="270dp"
+            android:background="@drawable/rectangle_3" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -53,104 +72,77 @@
                 app:layout_constraintTop_toTopOf="@+id/rectangle_3"
                 app:layout_constraintVertical_bias="0.0" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="313dp"
+            android:layout_height="376dp"
+            android:layout_alignTop="@+id/rectangle_3"
+            android:layout_alignBottom="@+id/rectangle_3"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/lato_regular"
+                android:text="Імейл:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editTextTextPersonEmail"
+                android:layout_width="241dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:fontFamily="@font/lato_light"
+                android:inputType="textEmailAddress"
+                android:maxEms="15"
+                android:minEms="2"
+                android:textColor="#BEFFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/lato_regular"
+                android:text="Пароль:"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editTextTextPasswordLogin"
+                android:layout_width="241dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:fontFamily="@font/lato_light"
+                android:inputType="textPassword"
+                android:maxEms="20"
+                android:minEms="8"
+                android:textColor="#FFFFFF" />
+
+
+            <ImageView
+                android:id="@+id/login_button"
+                android:layout_width="129dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="52dp"
+                app:srcCompat="@drawable/sign_in_button" />
+        </LinearLayout>
+
     </RelativeLayout>
-
-    <View
-        android:id="@+id/rectangle_3"
-        android:layout_width="323dp"
-        android:layout_height="479dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="126dp"
-        android:layout_marginBottom="451dp"
-        android:background="@drawable/rectangle_3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/some_id2"
-        android:layout_width="299dp"
-        android:layout_height="54dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="90dp"
-        android:fontFamily="@font/lato_regular"
-        android:gravity="center_horizontal|top"
-        android:text="Вхід"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/editTextTextPasswordLogin"
-        android:layout_width="241dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="180dp"
-        android:ems="10"
-        android:fontFamily="@font/lato_light"
-        android:hint="Наиши свій пароль"
-        android:inputType="textPassword"
-        android:maxEms="20"
-        android:minEms="8"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintVertical_bias="0.066" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonEmail"
-        android:layout_width="232dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="79dp"
-        android:ems="10"
-        android:fontFamily="@font/lato_light"
-        android:hint="Напиши свій імейл"
-        android:inputType="textEmailAddress"
-        android:maxEms="15"
-        android:minEms="2"
-        android:textColor="#BEFFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_3"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_3"
-        app:layout_constraintVertical_bias="0.265" />
-    <ImageView
-        android:id="@+id/login_button"
-        android:layout_width="164dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_3"
-        app:srcCompat="@drawable/sign_in" />
-
-    <TextView
-        android:id="@+id/login_button_text"
-        android:layout_width="127dp"
-        android:layout_height="24dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/lato_regular"
-        android:gravity="center_horizontal|top"
-        android:text="Увійти!"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/login_button"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_3"
-        app:layout_constraintTop_toTopOf="@+id/login_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
