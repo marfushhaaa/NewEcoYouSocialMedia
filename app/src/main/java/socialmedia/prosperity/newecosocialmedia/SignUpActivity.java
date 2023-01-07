@@ -74,7 +74,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         personIcon = findViewById(R.id.personImage);
         addPhotoIcon.setOnClickListener(this);
 
-
+        StorageReference profileRef = storageReference.child("users/"+ mAuth.getCurrentUser() + "/profile_image");
+        String user_id = mAuth.getCurrentUser().getUid();
     }
 
     @Override
@@ -87,56 +88,35 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 back();
                 break;
             case R.id.add_photo_icon:
-                Log.d("brainfuck", "started void");
                 selectImage();
                 break;
         }
     }
     // Select Image method
-    private void selectImage()
-    {
-
+    private void selectImage() {
         // Defining Implicit Intent to mobile gallery
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(
-                        intent,
-                        "Select Image from here..."),
-                PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select Image from here..."), PICK_IMAGE_REQUEST);
     }
     // Override onActivityResult method
     @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode,
-                                    Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        super.onActivityResult(requestCode,
-                resultCode,
-                data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         // checking request code and result code
-        // if request code is PICK_IMAGE_REQUEST and
-        // resultCode is RESULT_OK
+        // if request code is PICK_IMAGE_REQUEST and resultCode is RESULT_OK
         // then set image in the image view
-        if (requestCode == PICK_IMAGE_REQUEST
-                && resultCode == RESULT_OK
-                && data != null
-                && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
 
             // Get the Uri of data
             filePath = data.getData();
             try {
-
                 // Setting image on image view using Bitmap
-                Bitmap bitmap = MediaStore
-                        .Images
-                        .Media
-                        .getBitmap(
-                                getContentResolver(),
-                                filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 personIcon.setImageBitmap(bitmap);
             }
 
@@ -148,22 +128,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     // UploadImage method
-    private void uploadImage()
-    {
+    private void uploadImage() {
         if (filePath != null) {
-
-//            // Code for showing progressDialog while uploading
-//            ProgressDialog progressDialog
-//                    = new ProgressDialog(this);
-//            progressDialog.setTitle("Uploading...");
-//            progressDialog.show();
-
             // Defining the child of storageReference
-            StorageReference ref
-                    = storageReference
-                    .child(
-                            "Images/"
-                                    + UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("users/"+ mAuth.getCurrentUser().getUid() + "/"+ UUID.randomUUID().toString());
 
             // adding listeners on upload
             // or failure of image
