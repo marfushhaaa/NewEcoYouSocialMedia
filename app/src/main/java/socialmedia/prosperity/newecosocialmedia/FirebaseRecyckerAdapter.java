@@ -21,7 +21,7 @@ public class FirebaseRecyckerAdapter extends FirebaseRecyclerAdapter<Team, Fireb
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Team model) {
         holder.name.setText(model.getName());
         holder.bio.setText(model.getBio());
-        holder.hashtag.setText(model.getHash());
+        holder.hashtag.setText(model.getShortBio());
         holder.membernumber.setText(model.getMembernumber());
         holder.dateCreation.setText(model.getDateCreated());
 //        holder.teamPlaces.setText(model.getTotalMembers());

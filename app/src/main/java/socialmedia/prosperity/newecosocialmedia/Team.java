@@ -1,6 +1,6 @@
 package socialmedia.prosperity.newecosocialmedia;
 public class Team {
-    String name, bio, hash, membernumber, dateCreated;
+    String name, bio, shortBio, membernumber, dateCreated;
 //    int totalMemberNumber;
 //
 //    public int getTotalMemberNumber() {
@@ -14,10 +14,10 @@ public class Team {
     Team(){
 
     }
-    public Team(String name, String bio, String hash, String membernumber, String dateCreated) {
+    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated) {
         this.name = name;
         this.bio = bio;
-        this.hash = hash;
+        this.shortBio = shortBio;
         this.membernumber = membernumber;
 //        this.totalMembers = totalMembers;
         this.dateCreated = dateCreated;
@@ -55,12 +55,12 @@ public class Team {
         this.bio = bio;
     }
 
-    public String getHash() {
-        return hash;
+    public String getShortBio() {
+        return shortBio;
     }
 
-    public void setHash(String hash) {
-        this.hash = hash;
+    public void setShortBio(String shortBio) {
+        this.shortBio = shortBio;
     }
 
     public String getMembernumber() {
