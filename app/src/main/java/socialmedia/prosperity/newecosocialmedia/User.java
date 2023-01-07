@@ -2,7 +2,20 @@ package socialmedia.prosperity.newecosocialmedia;
 
 public class User {
 
-    public String name, nickname, email, bio;
+    public String name;
+    public String nickname;
+    public String email;
+    public String bio;
+
+    public String getTeam_path() {
+        return team_path;
+    }
+
+    public void setTeam_path(String team_path) {
+        this.team_path = team_path;
+    }
+
+    public String team_path;
 
     public String getName() {
         return name;

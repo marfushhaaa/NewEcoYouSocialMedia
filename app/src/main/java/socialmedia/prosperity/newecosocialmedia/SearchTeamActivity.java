@@ -71,9 +71,10 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                         holder. joinButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String unique_team_id = getRef(position).getKey();
-                                Log.d("brainfuck", "Click" + unique_team_id);
-                                Intent intent = new Intent(SearchTeamActivity.this,  SplashScreen.class);
+                                String team_id = getRef(position).getKey();
+                                Log.d("brainfuck", "Click" + team_id);
+                                Intent intent = new Intent(SearchTeamActivity.this,  TeamProfileActivity.class);
+                                intent.putExtra("team_id", team_id);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 finish();

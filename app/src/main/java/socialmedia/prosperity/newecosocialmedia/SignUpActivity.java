@@ -74,7 +74,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         personIcon = findViewById(R.id.personImage);
         addPhotoIcon.setOnClickListener(this);
 
-        StorageReference profileRef = storageReference.child("users/"+ mAuth.getCurrentUser() + "/profile_image");
         String user_id = mAuth.getCurrentUser().getUid();
     }
 
