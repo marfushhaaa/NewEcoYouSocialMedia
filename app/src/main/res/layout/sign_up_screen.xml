@@ -388,7 +388,7 @@
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="@+id/rectangle_3"
                 app:layout_constraintTop_toBottomOf="@+id/rectangle_3"
-                app:srcCompat="@drawable/sign_in_button" />
+                app:srcCompat="@drawable/sign_up_button" />
 
         </LinearLayout>
 

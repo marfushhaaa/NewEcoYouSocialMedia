@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,9 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchTeamActivity extends AppCompatActivity implements View.OnClickListener {
     View createATeamButton;
@@ -73,7 +69,7 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                             public void onClick(View v) {
                                 String team_id = getRef(position).getKey();
                                 Log.d("brainfuck", "Click" + team_id);
-                                Intent intent = new Intent(SearchTeamActivity.this,  TeamProfileActivity.class);
+                                Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
                                 intent.putExtra("team_id", team_id);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

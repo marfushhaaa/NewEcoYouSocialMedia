@@ -35,7 +35,7 @@
         <activity android:name=".CreateTeamActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".TeamProfileActivity"
+        <activity android:name=".MainActivity"
             android:screenOrientation="portrait"
             />
     </application>

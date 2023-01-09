@@ -6,28 +6,34 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <ScrollView
-        android:id="@+id/scroll_view_teamposts"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="413dp"
-        android:layout_below="@+id/imageView4"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <RelativeLayout
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:id="@+id/scroll_view_teamposts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="413dp"
+            android:layout_marginTop="230dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_teamposts"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </RelativeLayout>
-    </ScrollView>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_teamposts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+
 
     <ImageView
         android:id="@+id/imageView4"
@@ -113,6 +119,7 @@
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
+
 
     </LinearLayout>
 
