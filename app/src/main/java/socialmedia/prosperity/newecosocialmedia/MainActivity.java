@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
+        Team team = new Team();
         BottomNavigationView bView = findViewById(R.id.bottom_navigation);
         bView.setSelectedItemId(R.id.home);
         bView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -70,9 +71,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists() && snapshot.hasChild("name")){
+                    Team team = new Team();
+
+
                     String team_name = snapshot.child("name").getValue().toString();
                     name.setText("“" + team_name + "”");
-                    String team_bio = snapshot.child("bio").getValue().toString();
+                    String team_bio = snapshot.child("shortBio").getValue().toString();
                     bio.setText(team_bio);
                     String team_members = snapshot.child("membernumber").getValue().toString();
                     members.setText("Учасники" + team_members);
@@ -82,6 +86,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .child("team")
                             .setValue(receiverTeamId);
+
+
+//                    FirebaseDatabase.getInstance().getReference("Teams/" + receiverTeamId)
+//                            .child("users")
+//                            .setValue(team.getUsers() + 1);
+
+
+
                 }
             }
 

@@ -1,6 +1,43 @@
 package socialmedia.prosperity.newecosocialmedia;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Team {
-    String name, bio, shortBio, membernumber, dateCreated;
+    String name;
+    String bio;
+    String shortBio;
+
+    public int getUsers() {
+        return users;
+    }
+
+    public void setUsers(int users) {
+        this.users = users;
+    }
+
+    public int users;
+
+    public String getHashtag() {
+        return hashtag;
+    }
+
+    public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
+    }
+
+    public List<String> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<String> userList) {
+        this.userList = userList;
+    }
+
+    List<String> userList = new ArrayList<String>();
+    String hashtag;
+    String membernumber;
+    String dateCreated;
 //    int totalMemberNumber;
 //
 //    public int getTotalMemberNumber() {
@@ -14,13 +51,14 @@ public class Team {
     Team(){
 
     }
-    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated) {
+    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated, String hashtag, int users) {
         this.name = name;
         this.bio = bio;
         this.shortBio = shortBio;
         this.membernumber = membernumber;
 //        this.totalMembers = totalMembers;
         this.dateCreated = dateCreated;
+        this.hashtag = hashtag;
     }
 //
 //    public String getTotalMembers() {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,11 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SearchTeamActivity extends AppCompatActivity implements View.OnClickListener {
     View createATeamButton;
     RecyclerView recyclerView;
+    Team team = new Team();
 //    FirebaseRecyckerAdapter adapter;
 
 //    @Override
@@ -39,6 +46,7 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
         recyclerView = findViewById(R.id.recycler_view_teamsearching);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
 //
 //
 //        FirebaseRecyclerOptions<Team> options = new FirebaseRecyclerOptions.Builder<Team>()
@@ -47,7 +55,6 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
 //        adapter = new FirebaseRecyckerAdapter(options);
 //        recyclerView.setAdapter(adapter);
     }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -60,20 +67,74 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Team model) {
                         holder.name.setText(model.getName());
-                        holder.bio.setText(model.getBio());
-                        holder.shortBio.setText(model.getShortBio());
+                        holder.bio.setText(model.getShortBio());
+                        holder.teamHash.setText(model.getHashtag());
                         holder.membernumber.setText(model.getMembernumber());
                         holder.dateCreation.setText(model.getDateCreated());
+
                         holder. joinButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String team_id = getRef(position).getKey();
-                                Log.d("brainfuck", "Click" + team_id);
-                                Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
-                                intent.putExtra("team_id", team_id);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                                finish();
+//                                Log.d("brainfuck", "list" + team.getUserList().indexOf());
+//                                if (FirebaseAuth.getInstance().getCurrentUser().getUid()){
+                                    String team_id = getRef(position).getKey();
+                                FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/usersinteam")
+                                        .child("user" + FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+                                FirebaseDatabase.getInstance().getReference("Teams/" + team_id)
+                                        .child("users")
+                                        .setValue(team.getUsers());
+                                team.getUserList().add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//                                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+//                                DatabaseReference userInTeam = rootRef.child(team_id).
+//                                        child("usersinteam").
+//                                        child("user" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+//                                rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                        if(!snapshot.hasChild("Teams/" + team_id + "/usersinteam/" )){
+//                                            Log.d("brainfuck", "list " + team.getUsers());
+//                                            team.setUsers(team.getUsers()+1);
+//                                            Log.d("brainfuck", "list " + team.getUsers());
+//
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                    }
+//                                });
+//
+//                                ValueEventListener valueEventListener = new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                        if(!snapshot.exists()) {
+////                                            Log.d("brainfuck", "list " + team.getUsers());
+////                                            team.setUsers(team.getUsers()+1);
+////                                            Log.d("brainfuck", "list " + team.getUsers());
+//
+//
+//
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                    }
+//                                };
+//                                userInTeam.addValueEventListener(valueEventListener);
+                                    Log.d("brainfuck", "Click" + team_id);
+                                    Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
+                                    intent.putExtra("team_id", team_id);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                                    finish();
+//                                } else Toast.makeText(getApplicationContext(), "You are already here!", Toast.LENGTH_LONG).show();
+
                             }
                         });
                     }
@@ -90,13 +151,13 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
         recyclerAdapter.startListening();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView name, bio, shortBio, membernumber, dateCreation, teamPlaces;
+        TextView name, bio, teamHash, membernumber, dateCreation, teamPlaces;
         View joinButton;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.team_name);
             bio = itemView.findViewById(R.id.team_bio);
-            shortBio = itemView.findViewById(R.id.team_hash);
+            teamHash = itemView.findViewById(R.id.team_hash);
             membernumber = itemView.findViewById(R.id.team_members_number);
             dateCreation = itemView.findViewById(R.id.team_date_creation);
             joinButton = itemView.findViewById(R.id.join_team_button);
@@ -116,7 +177,7 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()){
             case R.id.create_a_team:
                 startActivity(new Intent(SearchTeamActivity.this, CreateTeamActivity.class));
-                finish();
+//                finish();
                 break;
         }
     }

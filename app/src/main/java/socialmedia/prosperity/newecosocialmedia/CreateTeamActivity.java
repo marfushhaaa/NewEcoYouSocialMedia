@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateTeamActivity extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth mAuth;
-    EditText editTextName, editTextMemberNumber, editTextBio, editTextShortBio;
+    EditText editTextName, editTextMemberNumber, editTextBio, editTextShortBio, editTextTeamHash;
     ImageView createButton, backButton;
 
     @Override
@@ -37,6 +37,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
         editTextShortBio = findViewById(R.id.editTextTeamShortBio);
         editTextBio = findViewById(R.id.editTextTeamBio);
         editTextMemberNumber = findViewById(R.id.editTextTeamMembers);
+        editTextTeamHash = findViewById(R.id.editTextTeamHash);
 
         createButton = findViewById(R.id.make_team_button);
         createButton.setOnClickListener(this);
@@ -70,6 +71,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
         String memberNum = ": " + editTextMemberNumber.getText().toString().trim();
         String bio = editTextBio.getText().toString().trim();
         String dateCreation = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
+        String hashtag = "#" + editTextTeamHash.getText().toString().trim();
 //        String totalMemberNum = "";
 
         if (name.isEmpty()) {
@@ -95,15 +97,17 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
             editTextBio.requestFocus();
             return;
         }
-        Team team = new Team(name, bio, shortBio, memberNum, dateCreation);
+        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, 0);
         FirebaseDatabase.getInstance().getReference("Teams")
                 .push()
                 .setValue(team).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
+
+//                    FirebaseDatabase.getInstance().getReference("Teams");
                                         Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(CreateTeamActivity.this,  SearchTeamActivity.class);
+                                        Intent intent = new Intent(CreateTeamActivity.this,  MainActivity.class);
                                         startActivity(intent);
                                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                         finish();

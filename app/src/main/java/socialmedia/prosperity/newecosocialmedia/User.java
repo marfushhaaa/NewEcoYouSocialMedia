@@ -2,6 +2,14 @@ package socialmedia.prosperity.newecosocialmedia;
 
 public class User {
 
+//    private static YellowVase instancevase;
+//    public static YellowVase getInstancevase() {
+//        if (instancevase == null) {
+//            instancevase = new YellowVase();
+//        }
+//        return instancevase;
+//    }
+
     public String name;
     public String nickname;
     public String email;
