@@ -1,6 +1,7 @@
 package socialmedia.prosperity.newecosocialmedia;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,8 +26,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView teamPhoto;
     DatabaseReference database;
     String receiverTeamId;
+
     FirebaseAuth mAuth;
     FrameLayout frameLayout;
+    String TAG = "brainfuck";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +38,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         frameLayout = findViewById(R.id.frameLayout);
         add();
+
         //team id that he has chosen
-        receiverTeamId =getIntent().getExtras().get("team_id").toString();
+//        if(!getIntent().getExtras().get("team_id").toString().equals(null)){
+            receiverTeamId =getIntent().getExtras().get("team_id").toString();
+//            Log.d(TAG, "if statement: " + receiverTeamId);
+//
+//        }
+
 
         database = FirebaseDatabase.getInstance().getReference().child("Teams");
 //        receivedTeamInfo();

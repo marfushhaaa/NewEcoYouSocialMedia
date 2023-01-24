@@ -2,6 +2,7 @@ package socialmedia.prosperity.newecosocialmedia;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +26,8 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
     FirebaseAuth mAuth;
     EditText editTextName, editTextMemberNumber, editTextBio, editTextShortBio, editTextTeamHash;
     ImageView createButton, backButton;
+    String admin_id;
+    String TAG = "brainfuck";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
 
         backButton = findViewById(R.id.back_button_team);
         backButton.setOnClickListener(this);
+
+        admin_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     @Override
@@ -97,19 +102,22 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
             editTextBio.requestFocus();
             return;
         }
-        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, 0);
-        FirebaseDatabase.getInstance().getReference("Teams")
-                .push()
-                .setValue(team).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, 1);
+        String mGroupId = FirebaseDatabase.getInstance().getReference("Teams").push().getKey();
+        Log.d(TAG, "mgkey:  " + mGroupId);
+        FirebaseDatabase.getInstance().getReference("Teams/" + mGroupId)
+                .setValue(team)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-
-//                    FirebaseDatabase.getInstance().getReference("Teams");
-                                        Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(CreateTeamActivity.this,  MainActivity.class);
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    Intent intent = new Intent(CreateTeamActivity.this,  AdminMainActivity.class);
+                    intent.putExtra("admin_id", admin_id);
+                    intent.putExtra("team_id", mGroupId);
+                    Log.d(TAG, "admin_id: " + admin_id);
+                     Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    startActivity(intent);
                                         finish();
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Failed to register!", Toast.LENGTH_LONG).show();

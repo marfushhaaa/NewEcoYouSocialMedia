@@ -38,6 +38,9 @@
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".AdminMainActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 

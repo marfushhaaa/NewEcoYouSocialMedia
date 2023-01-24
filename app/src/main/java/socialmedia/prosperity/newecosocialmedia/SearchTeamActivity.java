@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,12 +30,12 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
     View createATeamButton;
     RecyclerView recyclerView;
     Team team = new Team();
-//    FirebaseRecyckerAdapter adapter;
+    long childrenCount;
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
     String TAG = "brainfuck";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
 
         recyclerView = findViewById(R.id.recycler_view_teamsearching);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
     }
     @Override
     protected void onStart() {
@@ -67,12 +71,15 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                             @Override
                             public void onClick(View v) {
                                     String team_id = getRef(position).getKey();
-                                FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/usersinteam")
-                                        .child("user" + FirebaseAuth.getInstance().getCurrentUser().getUid())
+
+                                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users_in_team");
+                                printChildrenCount(rootRef, team_id);
+
+                                FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users_in_team" + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 FirebaseDatabase.getInstance().getReference("Teams/" + team_id)
-                                        .child("users")
-                                        .setValue(team.getUsers());
+                                        .child("users");
                                 team.getUserList().add(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                     Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
                                     intent.putExtra("team_id", team_id);
@@ -93,6 +100,22 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                 };
         recyclerView.setAdapter(recyclerAdapter);
         recyclerAdapter.startListening();
+    }
+
+    private void printChildrenCount(DatabaseReference ref, String team_id){
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    childrenCount = task.getResult().getChildrenCount();
+                    FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users")
+                            .setValue(childrenCount+1);
+                    Log.d(TAG, "1childrenCount: " + childrenCount);
+                } else {
+                    Log.d(TAG, task.getException().getMessage()); //Don't ignore potential errors!
+                }
+            }
+        });
     }
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView name, bio, teamHash, membernumber, dateCreation, teamPlaces;
