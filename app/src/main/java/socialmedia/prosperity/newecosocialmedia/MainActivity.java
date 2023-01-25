@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String team_bio = snapshot.child("shortBio").getValue().toString();
                     bio.setText(team_bio);
                     String team_members = snapshot.child("membernumber").getValue().toString();
-                    members.setText("Учасники" + team_members);
+                    members.setText("Учасники: " + team_members);
                     String team_dateCreation = snapshot.child("dateCreated").getValue().toString();
                     dateOfCreation.setText("Дата створення: " + team_dateCreation);
 

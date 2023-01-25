@@ -31,10 +31,12 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
     RecyclerView recyclerView;
     Team team = new Team();
     long childrenCount;
-
+    DatabaseReference database;
+    String team_places, member_number;
+    int team_places_int, member_number_int;
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
     }
     String TAG = "brainfuck";
     @Override
@@ -47,6 +49,8 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
 
         recyclerView = findViewById(R.id.recycler_view_teamsearching);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        database = FirebaseDatabase.getInstance().getReference().child("Teams");
 
 
     }
@@ -66,11 +70,11 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                         holder.teamHash.setText(model.getHashtag());
                         holder.membernumber.setText(model.getMembernumber());
                         holder.dateCreation.setText(model.getDateCreated());
-
+                        holder.teamPlaces.setText(model.getTeamPlaces());
                         holder. joinButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                    String team_id = getRef(position).getKey();
+                                String team_id = getRef(position).getKey();
 
                                 DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users_in_team");
                                 printChildrenCount(rootRef, team_id);
@@ -81,13 +85,14 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                                 FirebaseDatabase.getInstance().getReference("Teams/" + team_id)
                                         .child("users");
                                 team.getUserList().add(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                    Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
-                                    intent.putExtra("team_id", team_id);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
+                                intent.putExtra("team_id", team_id);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                             }
                         });
+
                     }
 
                     @NonNull
@@ -103,20 +108,49 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void printChildrenCount(DatabaseReference ref, String team_id){
+
+
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-                    childrenCount = task.getResult().getChildrenCount();
-                    FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users")
-                            .setValue(childrenCount+1);
+                    database.child(team_id).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            childrenCount = task.getResult().getChildrenCount();
+                            team_places = snapshot.child("users").getValue().toString();
+                            member_number = snapshot.child("membernumber").getValue().toString();
+                            team_places_int = Integer.parseInt(team_places);
+                            member_number_int = Integer.parseInt(member_number);
+                            if(team_places_int < member_number_int){
+                                FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users")
+                                        .setValue(childrenCount+1);
+                                
+                            }
+                            Log.d(TAG, "users: " + team_places);
+//                            team.setMembernumber(member_number);
+                            team.setTeamPlaces(team_places + "/" + member_number);
+                            Log.d(TAG, "memberNumber: " + team.getMembernumber());
+                            Log.d(TAG, "member_number: " + member_number);
+                            FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/teamPlaces")
+                                    .setValue(team_places + "/" + member_number);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                     Log.d(TAG, "1childrenCount: " + childrenCount);
                 } else {
                     Log.d(TAG, task.getException().getMessage()); //Don't ignore potential errors!
                 }
             }
         });
+
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView name, bio, teamHash, membernumber, dateCreation, teamPlaces;
         View joinButton;
@@ -128,6 +162,7 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
             membernumber = itemView.findViewById(R.id.team_members_number);
             dateCreation = itemView.findViewById(R.id.team_date_creation);
             joinButton = itemView.findViewById(R.id.join_team_button);
+            teamPlaces = itemView.findViewById(R.id.team_places);
         }
     }
 

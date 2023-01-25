@@ -73,10 +73,12 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
     private void registerTeam() {
         String name = editTextName.getText().toString().trim();
         String shortBio = editTextShortBio.getText().toString().trim();
-        String memberNum = ": " + editTextMemberNumber.getText().toString().trim();
+        String memberNum = editTextMemberNumber.getText().toString().trim();
         String bio = editTextBio.getText().toString().trim();
         String dateCreation = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
         String hashtag = "#" + editTextTeamHash.getText().toString().trim();
+        String teamPlaces = 0 + "/" + editTextMemberNumber.getText().toString().trim();
+
 //        String totalMemberNum = "";
 
         if (name.isEmpty()) {
@@ -102,10 +104,10 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
             editTextBio.requestFocus();
             return;
         }
-        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, 1);
-        String mGroupId = FirebaseDatabase.getInstance().getReference("Teams").push().getKey();
-        Log.d(TAG, "mgkey:  " + mGroupId);
-        FirebaseDatabase.getInstance().getReference("Teams/" + mGroupId)
+        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, teamPlaces);
+        String teamIdKey = FirebaseDatabase.getInstance().getReference("Teams").push().getKey();
+        Log.d(TAG, "mgkey:  " + teamIdKey);
+        FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
                 .setValue(team)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -113,7 +115,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
                 if (task.isSuccessful()){
                     Intent intent = new Intent(CreateTeamActivity.this,  AdminMainActivity.class);
                     intent.putExtra("admin_id", admin_id);
-                    intent.putExtra("team_id", mGroupId);
+                    intent.putExtra("team_id", teamIdKey);
                     Log.d(TAG, "admin_id: " + admin_id);
                      Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

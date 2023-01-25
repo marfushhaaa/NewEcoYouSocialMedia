@@ -7,7 +7,20 @@ public class Team {
     String name;
     String bio;
     String shortBio;
+    List<String> userList = new ArrayList<String>();
+    String hashtag;
+    String membernumber;
+    String dateCreated;
 
+    public String getTeamPlaces() {
+        return teamPlaces;
+    }
+
+    public void setTeamPlaces(String teamPlaces) {
+        this.teamPlaces = teamPlaces;
+    }
+
+    String teamPlaces;
     public int getUsers() {
         return users;
     }
@@ -34,10 +47,6 @@ public class Team {
         this.userList = userList;
     }
 
-    List<String> userList = new ArrayList<String>();
-    String hashtag;
-    String membernumber;
-    String dateCreated;
 //    int totalMemberNumber;
 //
 //    public int getTotalMemberNumber() {
@@ -51,11 +60,12 @@ public class Team {
     Team(){
 
     }
-    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated, String hashtag, int users) {
+    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated, String hashtag, String teamPlaces) {
         this.name = name;
         this.bio = bio;
         this.shortBio = shortBio;
         this.membernumber = membernumber;
+        this.teamPlaces = teamPlaces;
 //        this.totalMembers = totalMembers;
         this.dateCreated = dateCreated;
         this.hashtag = hashtag;
