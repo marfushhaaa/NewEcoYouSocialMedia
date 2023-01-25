@@ -15,15 +15,15 @@ public class User {
     public String email;
     public String bio;
 
-    public String getTeam_path() {
-        return team_path;
+    public String getTeam() {
+        return team;
     }
 
-    public void setTeam_path(String team_path) {
-        this.team_path = team_path;
+    public void setTeam(String team) {
+        this.team = team;
     }
 
-    public String team_path;
+    public String team;
 
     public String getName() {
         return name;
@@ -61,10 +61,11 @@ public class User {
 
     }
 
-    public User(String name, String nickname, String email, String bio){
+    public User(String name, String nickname, String email, String bio, String team){
         this.name = name;
         this.nickname = nickname;
         this.email = email;
         this.bio = bio;
+        this.team = team;
     }
 }

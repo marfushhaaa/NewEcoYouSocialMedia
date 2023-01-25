@@ -116,6 +116,9 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
                     Intent intent = new Intent(CreateTeamActivity.this,  AdminMainActivity.class);
                     intent.putExtra("admin_id", admin_id);
                     intent.putExtra("team_id", teamIdKey);
+                    FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .child("team")
+                            .setValue(teamIdKey);
                     Log.d(TAG, "admin_id: " + admin_id);
                      Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

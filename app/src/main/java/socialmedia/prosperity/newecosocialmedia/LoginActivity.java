@@ -1,7 +1,9 @@
 package socialmedia.prosperity.newecosocialmedia;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -16,11 +18,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.EventListener;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText editTextEmail, editTextPassword;
     ImageView login_button, back_button;
     FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
+    String team_id;
+    String TAG = "brainfuck";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +49,55 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextPassword = findViewById(R.id.editTextTextPasswordLogin);
 
         mAuth = FirebaseAuth.getInstance();
+        team_id = "";
+//        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+//        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                team_id = snapshot.child("team").getValue().toString();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+//        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+//        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                team_id = snapshot.child("team").getValue().toString();
+//                Log.d(TAG, "team: " + team_id);
+//
+//                SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+//                String login = preferences.getString("remember", "");
+//                Log.d(TAG, "login: " + login);
+//
+//                if(login.equals("true") && !team_id.equals("no team")){
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                    startActivity(intent);
+//                }else if(login.equals("false")){
+//                    Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
+//                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                    startActivity(intent);
+//                    Toast.makeText(LoginActivity.this,"Please, sign in", Toast.LENGTH_LONG).show();
+//                }else if(login.equals("true") && team_id.equals("no team")){
+//                    Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
+//                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                    startActivity(intent);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        Log.d(TAG, "team: " + team_id);
+
+
     }
 
     @Override
@@ -58,7 +120,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                team_id = snapshot.child("team").getValue().toString();
+                Log.d(TAG, "team: " + team_id);
 
+                SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+                String login = preferences.getString("remember", "");
+                Log.d(TAG, "login: " + login);
+
+                if(login.equals("true") && !team_id.equals("no team")){
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    startActivity(intent);
+                }else if(login.equals("false")){
+                    Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    startActivity(intent);
+                    Toast.makeText(LoginActivity.this,"Please, sign in", Toast.LENGTH_LONG).show();
+                }else if(login.equals("true") && team_id.equals("no team")){
+                    Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+//        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                team_id = snapshot.child("team").getValue().toString();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         if (email.isEmpty()){
             editTextEmail.setError("Напиши свій імейл!");
             editTextEmail.requestFocus();
@@ -79,15 +185,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editTextPassword.requestFocus();
             return;
         }
+
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     //redirect to user profile
+                    SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "true");
+                    editor.apply();
+
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     startActivity(new Intent(LoginActivity.this, SearchTeamActivity.class));
-                    Toast.makeText(getApplicationContext(),"User has been logged in!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"User has been logged in!, checked", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(LoginActivity.this,"Failed to login!", Toast.LENGTH_LONG).show();
+                    SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "false");
+                    editor.apply();
+                    Toast.makeText(LoginActivity.this,"Failed to login!, unchecked", Toast.LENGTH_LONG).show();
                 }
             }
         });

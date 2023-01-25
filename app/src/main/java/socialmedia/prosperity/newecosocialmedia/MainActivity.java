@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView teamPhoto;
     DatabaseReference database;
+    DatabaseReference database2;
     String receiverTeamId;
 
     FirebaseAuth mAuth;
@@ -36,19 +37,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_screen);
 
+        database2 = FirebaseDatabase.getInstance().getReference().child("Users");
+
         frameLayout = findViewById(R.id.frameLayout);
         add();
 
+
         //team id that he has chosen
-//        if(!getIntent().getExtras().get("team_id").toString().equals(null)){
-            receiverTeamId =getIntent().getExtras().get("team_id").toString();
+
+
+//        if(!getIntent().getExtras().get("team_id").toString().equals("no team")){
+//            receiverTeamId =getIntent().getExtras().get("team_id").toString();
 //            Log.d(TAG, "if statement: " + receiverTeamId);
 //
+//        }else{
+//            database2.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    receiverTeamId = snapshot.child("team").getValue().toString();
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
 //        }
 
 
         database = FirebaseDatabase.getInstance().getReference().child("Teams");
-//        receivedTeamInfo();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -77,34 +94,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void receivedTeamInfo(TextView name, TextView bio, TextView members, TextView dateOfCreation){
-        database.child(receiverTeamId).addValueEventListener(new ValueEventListener() {
+        database2.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists() && snapshot.hasChild("name")){
-                    Team team = new Team();
+                receiverTeamId = snapshot.child("team").getValue().toString();
+                database.child(receiverTeamId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists() && snapshot.hasChild("name")){
+                            Team team = new Team();
 
 
-                    String team_name = snapshot.child("name").getValue().toString();
-                    name.setText("“" + team_name + "”");
-                    String team_bio = snapshot.child("shortBio").getValue().toString();
-                    bio.setText(team_bio);
-                    String team_members = snapshot.child("membernumber").getValue().toString();
-                    members.setText("Учасники: " + team_members);
-                    String team_dateCreation = snapshot.child("dateCreated").getValue().toString();
-                    dateOfCreation.setText("Дата створення: " + team_dateCreation);
+                            String team_name = snapshot.child("name").getValue().toString();
+                            name.setText("“" + team_name + "”");
+                            String team_bio = snapshot.child("shortBio").getValue().toString();
+                            bio.setText(team_bio);
+                            String team_members = snapshot.child("membernumber").getValue().toString();
+                            members.setText("Учасники: " + team_members);
+                            String team_dateCreation = snapshot.child("dateCreated").getValue().toString();
+                            dateOfCreation.setText("Дата створення: " + team_dateCreation);
+                        }
+                    }
 
-                    FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .child("team")
-                            .setValue(receiverTeamId);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
+                    }
+                });
 
-//                    FirebaseDatabase.getInstance().getReference("Teams/" + receiverTeamId)
-//                            .child("users")
-//                            .setValue(team.getUsers() + 1);
-
-
-
-                }
             }
 
             @Override

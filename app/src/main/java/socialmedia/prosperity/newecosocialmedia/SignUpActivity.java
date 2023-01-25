@@ -170,6 +170,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String password = editTextPassword.getText().toString().trim();
         String bio = editTextBio.getText().toString().trim();
         String repeatedPassword = editTextCheckPassword.getText().toString().trim();
+        String team = "no team";
 
         if(name.isEmpty()){
             editTextName.setError("Write your name!");
@@ -225,7 +226,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-                            User user = new User(name, nickname, email, bio);
+                            User user = new User(name, nickname, email, bio, team);
+//                            FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                    .child("team")
+//                                    .setValue("");
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

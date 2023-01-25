@@ -84,6 +84,9 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                                         .setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 FirebaseDatabase.getInstance().getReference("Teams/" + team_id)
                                         .child("users");
+                                FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .child("team")
+                                        .setValue(team_id);
                                 team.getUserList().add(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
                                 intent.putExtra("team_id", team_id);
@@ -125,7 +128,7 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                             if(team_places_int < member_number_int){
                                 FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users")
                                         .setValue(childrenCount+1);
-                                
+
                             }
                             Log.d(TAG, "users: " + team_places);
 //                            team.setMembernumber(member_number);
