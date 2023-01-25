@@ -11,6 +11,11 @@
         android:icon="@drawable/ic_plus_icon"
         android:title="" />
 
+    <item
+        android:id="@+id/profileIcon"
+        android:icon="@drawable/ic_main_profile_icon"
+        android:title="" />
+
 
     <item
         android:id="@+id/team"

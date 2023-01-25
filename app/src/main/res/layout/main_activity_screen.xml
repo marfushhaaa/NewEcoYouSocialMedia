@@ -26,4 +26,100 @@
         app:itemBackground="@color/white"
         app:itemIconTint="@color/green"
         app:menu="@menu/menu" />
+
+    <RelativeLayout
+        android:id="@+id/create_window"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/frameLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="-2dp"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="390dp"
+            android:layout_height="376dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="486dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="-2dp"
+            app:srcCompat="@drawable/rectangle_55" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView14"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="88dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                app:srcCompat="@drawable/create_new_idea_button2" />
+
+            <TextView
+                android:id="@+id/create_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="122dp"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/lato_regular"
+                android:gravity="bottom"
+                android:text="Створити"
+                android:textColor="#1E5128"
+                android:textSize="18sp"></TextView>
+
+            <RelativeLayout
+                android:layout_width="272dp"
+                android:layout_height="77dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="18dp">
+
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="272dp"
+                    android:layout_height="77dp"
+                    app:srcCompat="@drawable/group_124" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView17"
+                        android:layout_width="93dp"
+                        android:layout_height="41dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="18dp"
+                        app:srcCompat="@drawable/create_challenge_button" />
+
+                    <ImageView
+                        android:id="@+id/imageView18"
+                        android:layout_width="93dp"
+                        android:layout_height="41dp"
+                        android:layout_marginStart="55dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="12dp"
+                        app:srcCompat="@drawable/create_post_button" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DatabaseReference database;
     DatabaseReference database2;
     String receiverTeamId;
-
+    RelativeLayout relativeLayout;
     FirebaseAuth mAuth;
     FrameLayout frameLayout;
     String TAG = "brainfuck";
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
+        relativeLayout = findViewById(R.id.create_window);
         Team team = new Team();
         BottomNavigationView bView = findViewById(R.id.bottom_navigation);
         bView.setSelectedItemId(R.id.home);
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch(item.getItemId())
                 {
                     case R.id.addContent:
-                        changeFragment(new AddPostFragment());
+                        addContent(relativeLayout);
                         return true;
                     case R.id.team:
                         changeFragment(new TeamProfileFragment());
@@ -91,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+    public void addContent(RelativeLayout relativeLayout){
+        relativeLayout.setVisibility(View.VISIBLE);
     }
 
     public void receivedTeamInfo(TextView name, TextView bio, TextView members, TextView dateOfCreation){
@@ -137,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.commit();
     }
     public void changeFragment(final Fragment fragment){
+        relativeLayout.setVisibility(View.INVISIBLE);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.replace(R.id.frameLayout, fragment);
