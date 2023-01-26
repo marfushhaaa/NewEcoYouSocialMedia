@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView teamPhoto;
+    ImageView teamPhoto, addPost, addChallenge, addIdea;
     DatabaseReference database;
     DatabaseReference database2;
     String receiverTeamId;
@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         frameLayout = findViewById(R.id.frameLayout);
         add();
+
+        addChallenge = findViewById(R.id.add_challenge_button);
+        addIdea = findViewById(R.id.add_idea_button);
+        addPost = findViewById(R.id.add_post_button);
 
 
         //team id that he has chosen
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch(item.getItemId())
                 {
                     case R.id.addContent:
-                        addContent(relativeLayout);
+                        addContent(relativeLayout, addChallenge, addIdea, addPost);
                         return true;
                     case R.id.team:
                         changeFragment(new TeamProfileFragment());
@@ -94,8 +98,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
-    public void addContent(RelativeLayout relativeLayout){
+    public void addContent(RelativeLayout relativeLayout, ImageView bChall, ImageView bIdea, ImageView bPost){
         relativeLayout.setVisibility(View.VISIBLE);
+        bPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeFragment(new CreatePostFragment());
+            }
+        });
     }
 
     public void receivedTeamInfo(TextView name, TextView bio, TextView members, TextView dateOfCreation){
