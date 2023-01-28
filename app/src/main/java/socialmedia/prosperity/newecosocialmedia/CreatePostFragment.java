@@ -12,12 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class CreatePostFragment extends Fragment {
-    ImageView back_button;
+    ImageView back_button, post_button, addImage_button;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_post_screen, null);
 
+        post_button = view.findViewById(R.id.post_a_post_button);
+        addImage_button = view.findViewById(R.id.add_post_image_button);
         back_button = view.findViewById(R.id.back_button_post);
         changeFragment(new HomePageFragment(), back_button);
 
