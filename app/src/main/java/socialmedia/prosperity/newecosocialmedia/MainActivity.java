@@ -1,6 +1,10 @@
 package socialmedia.prosperity.newecosocialmedia;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,9 +26,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView teamPhoto, addPost, addChallenge, addIdea;
+    ImageView teamPhoto, addPost, addChallenge, addIdea, postIcon;
     DatabaseReference database;
     DatabaseReference database2;
     String receiverTeamId;
@@ -32,6 +41,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseAuth mAuth;
     FrameLayout frameLayout;
     String TAG = "brainfuck";
+    // Uri indicates, where the image will be picked from
+    private Uri filePath;
+
+    // request code
+    private final int PICK_IMAGE_REQUEST = 22;
+
+    // instance for firebase storage and StorageReference
+    FirebaseStorage storage;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addChallenge = findViewById(R.id.add_challenge_button);
         addIdea = findViewById(R.id.add_idea_button);
         addPost = findViewById(R.id.add_post_button);
+        //postIcon = findViewById(R.id.add_post_image_button);
 
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         //team id that he has chosen
 
@@ -162,4 +183,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
 
     }
+    public void addPostImage(){
+        selectImage();
+        uploadImage();
+    }
+    // Select Image method
+    public void selectImage() {
+        // Defining Implicit Intent to mobile gallery
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Image from here..."), PICK_IMAGE_REQUEST);
+    }
+    // Override onActivityResult method
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // checking request code and result code
+        // if request code is PICK_IMAGE_REQUEST and resultCode is RESULT_OK
+        // then set image in the image view
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Get the Uri of data
+            filePath = data.getData();
+            try {
+                // Setting image on image view using Bitmap
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                postIcon.setImageBitmap(bitmap);
+            }
+
+            catch (IOException e) {
+                // Log the exception
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // UploadImage method
+    public void uploadImage() {
+        if (filePath != null) {
+            // Defining the child of storageReference
+            StorageReference ref = storageReference.child("post/"+ mAuth.getCurrentUser().getUid() + "/"+ UUID.randomUUID().toString());
+
+            // adding listeners on upload
+            // or failure of image
+            ref.putFile(filePath)
+//                    .addOnSuccessListener(
+//                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//
+//                                @Override
+//                                public void onSuccess(
+//                                        UploadTask.TaskSnapshot taskSnapshot)
+//                                {
+//
+//                                    // Image uploaded successfully
+//                                    // Dismiss dialog
+//                                    progressDialog.dismiss();
+//                                    Toast
+//                                            .makeText(SignUpActivity.this,
+//                                                    "Image Uploaded!!",
+//                                                    Toast.LENGTH_SHORT)
+//                                            .show();
+//                                }
+//                            })
+            ;
+        }
+    }
+
 }
