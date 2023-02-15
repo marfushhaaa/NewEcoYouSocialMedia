@@ -113,7 +113,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    Intent intent = new Intent(CreateTeamActivity.this,  AdminMainActivity.class);
+                    Intent intent = new Intent(CreateTeamActivity.this,  MainActivity.class);
                     intent.putExtra("admin_id", admin_id);
                     intent.putExtra("team_id", teamIdKey);
                     FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())

@@ -41,6 +41,9 @@
         <activity android:name=".AdminMainActivity"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".CreatePostActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 

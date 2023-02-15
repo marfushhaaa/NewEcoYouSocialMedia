@@ -93,7 +93,7 @@
                     <EditText
                         android:id="@+id/create_post_name"
                         android:layout_width="155dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginStart="2dp"
                         android:layout_marginTop="13dp"
                         android:backgroundTint="@color/dark_green"
@@ -111,7 +111,8 @@
                         app:layout_constraintHorizontal_bias="0.504"
                         app:layout_constraintStart_toStartOf="@+id/rectangle_3"
                         app:layout_constraintTop_toTopOf="@+id/rectangle_3"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        android:autofillHints="" />
 
                     <EditText
                         android:id="@+id/create_post_text"
@@ -145,7 +146,10 @@
                         android:layout_height="39dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
-                        app:srcCompat="@drawable/group_126" />
+                        app:srcCompat="@drawable/group_126" >
+
+                    </ImageView>
+
                 </LinearLayout>
             </ScrollView>
 

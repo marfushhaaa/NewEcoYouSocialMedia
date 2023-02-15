@@ -1,11 +1,13 @@
 package socialmedia.prosperity.newecosocialmedia;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +16,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class CreatePostFragment extends Fragment {
     ImageView back_button, post_button, addImage_button;
+    ScrollView scrollView;
     EditText name_post, bio_post;
+    String TAG = "brainfuck";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -25,20 +30,21 @@ public class CreatePostFragment extends Fragment {
         name_post = view.findViewById(R.id.create_post_name);
         bio_post = view.findViewById(R.id.create_post_text);
 
+        post_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: click");
+                ((MainActivity)getActivity()).uploadImage(name_post, bio_post);
+                changeFragment(new HomePageFragment());
+
+            }
+        });
 
         ((MainActivity)getActivity()).postIcon = view.findViewById(R.id.post_img);
         addImage_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).selectImage();
-            }
-        });
-        post_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity)getActivity()).uploadImage();
-                changeFragment(new HomePageFragment(), post_button);
-
             }
         });
 
@@ -56,6 +62,12 @@ public class CreatePostFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+    }
+    public void changeFragment(final Fragment fragment){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout, fragment);
+        transaction.commit();
 
     }
 

@@ -8,10 +8,13 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,8 +34,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -38,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DatabaseReference database2;
     String receiverTeamId;
     RelativeLayout relativeLayout;
+    ScrollView scrollView;
     FirebaseAuth mAuth;
     FrameLayout frameLayout;
     String TAG = "brainfuck";
@@ -96,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
 
         relativeLayout = findViewById(R.id.create_window);
+//        scrollView = findViewById(R.id.create_scroll_view);
+//        ScrollView scrollView = findViewById(R.id.create_scroll_view);
         Team team = new Team();
         BottomNavigationView bView = findViewById(R.id.bottom_navigation);
         bView.setSelectedItemId(R.id.home);
@@ -124,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment(new CreatePostFragment());
+                changeActivity();
             }
         });
     }
@@ -169,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void add(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.frameLayout,new TeamProfileFragment());
+        transaction.add(R.id.frameLayout,new HomePageFragment());
         transaction.commit();
     }
     public void changeFragment(final Fragment fragment){
@@ -182,10 +195,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-    }
-    public void addPostImage(){
-        selectImage();
-        uploadImage();
     }
     // Select Image method
     public void selectImage() {
@@ -220,15 +229,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void changeActivity(){
+        Intent intent = new Intent(MainActivity.this,  CreatePostActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
+    }
     // UploadImage method
-    public void uploadImage() {
+    public void uploadImage(EditText editTextName, EditText editTextText) {
+        String name = editTextName.getText().toString().trim();
+        String text = editTextText.getText().toString().trim();
+        String dateCreation = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
+        String userCreated = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid()).toString();
+        if (name.isEmpty()) {
+            editTextName.setError("Write your name!");
+            editTextName.requestFocus();
+            return;
+        }
+        if (text.isEmpty()) {
+            editTextText.setError("Write your hashtag!");
+            editTextText.requestFocus();
+            return;
+        }
         if (filePath != null) {
-            // Defining the child of storageReference
-            StorageReference ref = storageReference.child("post/"+ mAuth.getCurrentUser().getUid() + "/"+ UUID.randomUUID().toString());
+            //post id, future path
+            String postIdKey = UUID.randomUUID().toString();
 
+            // Defining the child of storageReference
+            StorageReference ref = storageReference.child("post/"+ mAuth.getCurrentUser().getUid() + "/"+ postIdKey);
+            Post post = new Post(name, text, postIdKey, dateCreation, userCreated);
+            FirebaseDatabase.getInstance().getReference("Posts/" + postIdKey)
+                    .push()
+                    .setValue(post);
             // adding listeners on upload
             // or failure of image
             ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getApplicationContext(),"Post posted!", Toast.LENGTH_LONG).show();
+                        }
+                    })
 //                    .addOnSuccessListener(
 //                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
 //
@@ -247,8 +288,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                                            .show();
 //                                }
 //                            })
+
+
             ;
         }
     }
 
+//    public void post(EditText editTextName, EditText editTextText) {
+//        String name = editTextName.getText().toString().trim();
+//        String text = editTextText.getText().toString().trim();
+//        String dateCreation = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
+//
+////        String totalMemberNum = "";
+//
+//        if (name.isEmpty()) {
+//            editTextName.setError("Write your name!");
+//            editTextName.requestFocus();
+//            return;
+//        }
+//
+//        if (text.isEmpty()) {
+//            editTextText.setError("Write your hashtag!");
+//            editTextText.requestFocus();
+//            return;
+//        }
+//
+//        Post post = new Post(name, text, )
+//
+//        String teamIdKey = FirebaseDatabase.getInstance().getReference("Teams").push().getKey();
+//        Log.d(TAG, "mgkey:  " + teamIdKey);
+//        FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
+//                .setValue(team)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()){
+//                            Intent intent = new Intent(CreateTeamActivity.this,  AdminMainActivity.class);
+//                            intent.putExtra("admin_id", admin_id);
+//                            intent.putExtra("team_id", teamIdKey);
+//                            FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                    .child("team")
+//                                    .setValue(teamIdKey);
+//                            Log.d(TAG, "admin_id: " + admin_id);
+//                            Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
+//                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                            startActivity(intent);
+//                            finish();
+//                        }else{
+//                            Toast.makeText(getApplicationContext(),"Failed to register!", Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//                });
+//
+//    }
 }
