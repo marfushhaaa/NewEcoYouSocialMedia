@@ -88,7 +88,7 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                                         .child("team")
                                         .setValue(team_id);
                                 team.getUserList().add(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
+                                Intent intent = new Intent(SearchTeamActivity.this,  CreatePostActivity.class);
                                 intent.putExtra("team_id", team_id);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

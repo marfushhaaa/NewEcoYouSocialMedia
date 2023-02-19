@@ -1,6 +1,7 @@
 package socialmedia.prosperity.newecosocialmedia;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,13 +56,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Uri indicates, where the image will be picked from
     private Uri filePath;
 
+    ImageView rImage;
+
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
 
     // instance for firebase storage and StorageReference
     FirebaseStorage storage;
     StorageReference storageReference;
-
+    String postIdKey;
+    int a;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,11 +79,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addChallenge = findViewById(R.id.add_challenge_button);
         addIdea = findViewById(R.id.add_idea_button);
         addPost = findViewById(R.id.add_post_button);
+
         //postIcon = findViewById(R.id.add_post_image_button);
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+//        Bundle bundle = getIntent().getExtras();
+//        postIdKey = bundle.getString("postIdKey");
 
+//        SharedPreferences settings = getSharedPreferences("MyPrefs", 0);
+//
+//        if (settings.getBoolean("is_first_time", true)) {
+//            //the app is being launched for first time, do something
+//            Log.d(TAG, "First time");
+//
+//            // first time task
+//            a = 0;
+//            // record the fact that the app has been started at least once
+//            settings.edit().putBoolean("is_first_time", false).commit();
+//        }
+//        else
+//        {
+//            a = 1;
+//
+//        }
         //team id that he has chosen
 
 
@@ -118,7 +141,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch(item.getItemId())
                 {
                     case R.id.addContent:
-                        addContent(relativeLayout, addChallenge, addIdea, addPost);
+                        changeActivity();
+//                        addContent(relativeLayout, addChallenge, addIdea, addPost);
                         return true;
                     case R.id.team:
                         changeFragment(new TeamProfileFragment());
@@ -229,11 +253,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+
     private void changeActivity(){
         Intent intent = new Intent(MainActivity.this,  CreatePostActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
+    }
+
+    public void changeActivity2(ImageView button){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "clicked lol");
+                Intent intent = new Intent(MainActivity.this,  HomeActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
+        });
+
     }
     // UploadImage method
     public void uploadImage(EditText editTextName, EditText editTextText) {

@@ -39,7 +39,7 @@ public class CreatePostActivity extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageReference;
     FirebaseAuth mAuth;
-
+    String postIdKey;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class CreatePostActivity extends AppCompatActivity {
         storageReference = storage.getReference();
         mAuth = FirebaseAuth.getInstance();
         postIcon = findViewById(R.id.post_img);
+        postIdKey = UUID.randomUUID().toString();
 
 
         post_button.setOnClickListener(new View.OnClickListener() {
@@ -108,13 +109,11 @@ public class CreatePostActivity extends AppCompatActivity {
         }
         if (filePath != null) {
             //post id, future path
-            String postIdKey = UUID.randomUUID().toString();
 
             // Defining the child of storageReference
-            StorageReference ref = storageReference.child("post/"+ mAuth.getCurrentUser().getUid() + "/"+ postIdKey);
+            StorageReference ref = storageReference.child("post/"+ postIdKey);
             Post post = new Post(name, text, postIdKey, dateCreation, userCreated);
             FirebaseDatabase.getInstance().getReference("Posts/" + postIdKey)
-                    .push()
                     .setValue(post);
             // adding listeners on upload
             // or failure of image
@@ -156,6 +155,7 @@ public class CreatePostActivity extends AppCompatActivity {
     }
     private void changeActivity(){
         Intent intent = new Intent(CreatePostActivity.this,  MainActivity.class);
+        intent.putExtra("postIdKey", postIdKey);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
