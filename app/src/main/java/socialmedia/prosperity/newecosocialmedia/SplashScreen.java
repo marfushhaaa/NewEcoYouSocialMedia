@@ -1,19 +1,59 @@
 package socialmedia.prosperity.newecosocialmedia;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SplashScreen extends AppCompatActivity {
     View registerbutt, loginbutt;
+    String TAG = "brainfuck";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+
+        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+        String login = preferences.getString("remember", "");
+        Log.d(TAG, "login: " + login);
+
+        //check password
+        if(login.equals("true")){
+            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            startActivity(intent);
+        }
+//        else if(login.equals("false")){
+
+////                    Intent intent = new Intent(SplashScreen.this, SearchTeamActivity.class);
+////                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+////                    startActivity(intent);
+//        }
+
+
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null) {
+//            // User is signed in
+//            Intent i = new Intent(SplashScreen.this, MainActivity.class);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(i);
+//        } else {
+//
+//            // User is signed out
+////            Log.d(TAG, "onAuthStateChanged:signed_out");
+//        }
+
+        //paste here shared preferences
 
         registerbutt = findViewById(R.id.register_button);
         registerbutt.setOnClickListener(new View.OnClickListener() {
@@ -31,10 +71,12 @@ public class SplashScreen extends AppCompatActivity {
         loginbutt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(SplashScreen.this,  LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
+
             }
         });
     }

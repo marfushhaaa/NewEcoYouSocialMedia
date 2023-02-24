@@ -150,11 +150,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.home:
                         changeFragment(new HomePageFragment());
                         return true;
+                    case R.id.profileIcon:
+                        changeFragment(new UserProfileActivity());
+                        return true;
                 }
                 return false;
             }
         });
 
+    }
+
+    public void logOut(){
+        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("remember", "false");
+        editor.apply();
+
+        Intent intent = new Intent(MainActivity.this,  SplashScreen.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
     }
     public void addContent(RelativeLayout relativeLayout, ImageView bChall, ImageView bIdea, ImageView bPost){
         relativeLayout.setVisibility(View.VISIBLE);

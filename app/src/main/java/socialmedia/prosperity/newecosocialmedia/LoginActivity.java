@@ -131,6 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String login = preferences.getString("remember", "");
                 Log.d(TAG, "login: " + login);
 
+                //check password
                 if(login.equals("true") && !team_id.equals("no team")){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

@@ -78,15 +78,10 @@ public class HomeActivity extends AppCompatActivity {
                     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Post model) {
                         holder.name.setText(model.getName());
                         holder.bio.setText(model.getText());
-//                        String postImage = storageReference.toString();
-//                        Log.d(TAG, "post: " + postImage);
                         storageReference.child("post/" + model.getPhoto_link()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
                                 Picasso.get().load(uri).into(holder.image);
-
-//                                Glide.with(getApplicationContext()).load(uri.toString()).into(holder.image);
-                                // Got the download URL for 'users/me/profile.png'
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
