@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ScrollView
+        android:id="@+id/challenge_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/back_button_post2"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="31dp"
+                    android:layout_marginTop="32dp"
+                    app:srcCompat="@drawable/ic_back_dark_arrow_icon" />
+
+                <TextView
+                    android:id="@+id/some_id4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/lato_regular"
+                    android:gravity="center_horizontal|top"
+                    android:text="Створення челенджу"
+                    android:textColor="#1E5128"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+                    app:layout_constraintEnd_toEndOf="@+id/rectangle_3"
+                    app:layout_constraintHorizontal_bias="0.504"
+                    app:layout_constraintStart_toStartOf="@+id/rectangle_3"
+                    app:layout_constraintTop_toTopOf="@+id/rectangle_3"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="31dp"
+                    app:srcCompat="@drawable/rectangle_13" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView20"
+                        android:layout_width="300dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="50dp"
+                        app:srcCompat="@drawable/picture" />
+
+                    <EditText
+                        android:id="@+id/editTextChallengeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="7dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:ems="10"
+                        android:fontFamily="@font/lato_regular"
+                        android:hint="Назва челенджу"
+                        android:inputType="textPersonName"
+                        android:maxEms="25"
+                        android:textColor="@color/white"
+                        android:textColorHighlight="#701E5128"
+                        android:textColorHint="#80FFFFFF"
+                        android:textColorLink="@color/system_ui_scrim_light"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editTextChallengeBio"
+                        android:layout_width="300dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="50dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:ems="10"
+                        android:fontFamily="@font/lato_regular"
+                        android:gravity="top"
+                        android:hint="Якийсь коротенький текст опису челенжу який буде тут відображатись в якості превью опису челенджу..."
+                        android:inputType="textPersonName"
+                        android:maxEms="100"
+                        android:selectAllOnFocus="false"
+                        android:singleLine="false"
+                        android:text=""
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/white"
+                        android:textColorHighlight="#701E5128"
+                        android:textColorHint="#80FFFFFF"
+                        android:textColorLink="@color/system_ui_scrim_light"
+                        android:textSize="11sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView22"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:srcCompat="@drawable/white_stroke" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="0dp">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="#"
+                            android:textColor="#F4EEA9"
+                            android:textSize="13dp" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName4"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:backgroundTint="#00F4EEA9"
+                            android:ems="10"
+                            android:fontFamily="@font/lato_bold"
+                            android:hint="район/усі"
+                            android:inputType="textPersonName"
+                            android:text=""
+                            android:textColor="#F4EEA9"
+                            android:textColorHint="#80F4EEA9"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="0"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="#"
+                            android:textColor="#F4EEA9"
+                            android:textSize="13dp" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName5"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:backgroundTint="#00F4EEA9"
+                            android:ems="10"
+                            android:fontFamily="@font/lato_bold"
+                            android:hint="час_виконання"
+                            android:inputType="textPersonName"
+                            android:text=""
+                            android:textColor="#F4EEA9"
+                            android:textColorHint="#80F4EEA9"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="0"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="#"
+                            android:textColor="#F4EEA9"
+                            android:textSize="13dp" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName6"
+                            android:layout_width="85dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:backgroundTint="#00F4EEA9"
+                            android:ems="10"
+                            android:fontFamily="@font/lato_bold"
+                            android:hint="ваш_хештег"
+                            android:inputType="textPersonName"
+                            android:text=""
+                            android:textColor="#F4EEA9"
+                            android:textColorHint="#80F4EEA9"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle377">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="19dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="24dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.019">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="24dp"
+                                android:gravity="left|end"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/imageView27"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/circle" />
+
+                                <TextView
+                                    android:id="@+id/textView55"
+                                    android:layout_width="253dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Як на твою думку, цей челендж приніс  користь для збереження довкілля?"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:layout_width="79dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Це обов’язкове питання"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="#BBBBBB"
+                                    android:textSize="9dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="12dp"
+                                android:gravity="start"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/imageView35"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/textView11"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Так (1 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <ImageView
+                                    android:id="@+id/chimageView30"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/chtextView15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Ні (0 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <ImageView
+                                    android:id="@+id/chimageView31"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/chtextView16"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Не зовсім (0,5 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/imageView32"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="18dp"
+                            app:srcCompat="@drawable/green_stroke" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.019">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="24dp"
+                                android:gravity="left|end"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/chaimageView26"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/circle" />
+
+                                <TextView
+                                    android:id="@+id/chatextView5"
+                                    android:layout_width="253dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Як на  твою думку, цей челендж приніс
+користь для збереження довкілля?"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:layout_width="79dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Це обов’язкове питання"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="#BBBBBB"
+                                    android:textSize="9dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="12dp"
+                                android:gravity="start"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/chaimageView29"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/chatextView4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Так (1 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <ImageView
+                                    android:id="@+id/chacimageView30"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/chatextView15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Ні (0 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <ImageView
+                                    android:id="@+id/chaimageView31"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/chatextView16"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Не зовсім (0,5 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/imageView30"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="18dp"
+                            app:srcCompat="@drawable/green_stroke" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.019">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="24dp"
+                                android:gravity="left|end"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/imageView26"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/circle" />
+
+                                <TextView
+                                    android:id="@+id/textView5"
+                                    android:layout_width="253dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Як на  твою думку, цей челендж приніс
+користь для збереження довкілля?"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:layout_width="79dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Це обов’язкове питання"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="#BBBBBB"
+                                    android:textSize="9dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="12dp"
+                                android:gravity="start"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/imageView29"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/textView4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Так (1 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <ImageView
+                                    android:id="@+id/cimageView30"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/ctextView15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Ні (0 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                                <ImageView
+                                    android:id="@+id/cimageView31"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="0"
+                                    app:srcCompat="@drawable/square" />
+
+                                <TextView
+                                    android:id="@+id/ctextView16"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Не зовсім (0,5 б.)"
+                                    android:textColor="#1E5128"
+                                    android:textSize="12dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                        <ImageView
+                            android:id="@+id/challimageView30"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:srcCompat="@drawable/green_stroke" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView31"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                app:srcCompat="@drawable/add_circle_icon" />
+
+                            <TextView
+                                android:id="@+id/chaltextView16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/lato_regular"
+                                android:text="Додати питання"
+                                android:textColor="#1E5128"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </ScrollView>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
