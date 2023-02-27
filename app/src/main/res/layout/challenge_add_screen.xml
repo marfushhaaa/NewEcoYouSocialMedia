@@ -26,7 +26,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/back_button_post2"
+                    android:id="@+id/back_button_challenge"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_marginStart="31dp"

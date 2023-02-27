@@ -1,5 +1,6 @@
 package socialmedia.prosperity.newecosocialmedia;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -7,11 +8,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -20,12 +28,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -129,11 +136,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
-        relativeLayout = findViewById(R.id.create_window);
+//        relativeLayout = findViewById(R.id.create_window);
 //        scrollView = findViewById(R.id.create_scroll_view);
 //        ScrollView scrollView = findViewById(R.id.create_scroll_view);
         Team team = new Team();
         BottomNavigationView bView = findViewById(R.id.bottom_navigation);
+        View addContent = findViewById(R.id.addContent);
         bView.setSelectedItemId(R.id.home);
         bView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -141,7 +149,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch(item.getItemId())
                 {
                     case R.id.addContent:
-                        changeActivity();
+                        onButtonShowPopupWindowClick(addContent);
+//                        showPopup(addContent);
+//                        changeActivity();
 //                        addContent(relativeLayout, addChallenge, addIdea, addPost);
                         return true;
                     case R.id.team:
@@ -159,7 +169,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+    public void onButtonShowPopupWindowClick(View view) {
 
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window, null);
+
+        // create the popup window
+        int width = RelativeLayout.LayoutParams.MATCH_PARENT;
+        int height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+
+
+
+
+        ImageView addChallenge = popupView.findViewById(R.id.add_challenge_button);
+        ImageView addPost = popupView.findViewById(R.id.add_post_button);
+        addPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,  CreatePostActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
+        });
+        addChallenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,  CreateChallengeActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
+        });
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+
+
+    }
     public void logOut(){
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -170,15 +229,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
-    }
-    public void addContent(RelativeLayout relativeLayout, ImageView bChall, ImageView bIdea, ImageView bPost){
-        relativeLayout.setVisibility(View.VISIBLE);
-        bPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeActivity();
-            }
-        });
     }
 
     public void receivedTeamInfo(TextView name, TextView bio, TextView members, TextView dateOfCreation){
@@ -225,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.commit();
     }
     public void changeFragment(final Fragment fragment){
-        relativeLayout.setVisibility(View.INVISIBLE);
+//        relativeLayout.setVisibility(View.INVISIBLE);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.replace(R.id.frameLayout, fragment);
@@ -276,6 +326,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
+//    public void showPopup(View v) {
+//        Context wrapper = new ContextThemeWrapper(this, R.style.PopupMenu);
+//        PopupMenu popup = new PopupMenu(wrapper, v);
+//        MenuInflater inflater = popup.getMenuInflater();
+//        inflater.inflate(R.menu.popup_menu, popup.getMenu());
+//        popup.show();
+//    }
 
     public void changeActivity2(ImageView button){
         button.setOnClickListener(new View.OnClickListener() {

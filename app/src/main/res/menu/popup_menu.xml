@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/challenge_button"
+        android:title="fgbrbf" />
+    <item
+        android:id="@+id/post_button"
+        android:title="fgbfsb" />
+</menu>

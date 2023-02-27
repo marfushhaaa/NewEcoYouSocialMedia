@@ -14,7 +14,16 @@
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
 
+    </style>
+    <style name="PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupBackground">@drawable/rectangle_55</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/lato_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="eco_you">
