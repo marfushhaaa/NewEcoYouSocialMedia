@@ -77,14 +77,14 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView20"
+                        android:id="@+id/setImageChallenge"
                         android:layout_width="300dp"
                         android:layout_height="150dp"
                         android:layout_marginStart="50dp"
                         app:srcCompat="@drawable/picture" />
 
                     <EditText
-                        android:id="@+id/editTextChallengeName"
+                        android:id="@+id/challengeName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="50dp"
@@ -95,6 +95,7 @@
                         android:hint="Назва челенджу"
                         android:inputType="textPersonName"
                         android:maxEms="25"
+                        android:textAlignment="viewStart"
                         android:textColor="@color/white"
                         android:textColorHighlight="#701E5128"
                         android:textColorHint="#80FFFFFF"
@@ -102,7 +103,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/editTextChallengeBio"
+                        android:id="@+id/challengeBio"
                         android:layout_width="300dp"
                         android:layout_height="64dp"
                         android:layout_gravity="top"
@@ -110,12 +111,12 @@
                         android:backgroundTint="#00FFFFFF"
                         android:ems="10"
                         android:fontFamily="@font/lato_regular"
-                        android:gravity="top"
+                        android:gravity="start|top"
                         android:hint="Якийсь коротенький текст опису челенжу який буде тут відображатись в якості превью опису челенджу..."
                         android:inputType="textPersonName"
                         android:maxEms="100"
                         android:selectAllOnFocus="false"
-                        android:singleLine="false"
+                        android:singleLine="true"
                         android:text=""
                         android:textAlignment="viewStart"
                         android:textColor="@color/white"
@@ -149,7 +150,7 @@
                             android:textSize="13dp" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName4"
+                            android:id="@+id/challengeDistricts"
                             android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
@@ -175,7 +176,7 @@
                             android:textSize="13dp" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName5"
+                            android:id="@+id/challengeTimeForDoing"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
@@ -201,7 +202,7 @@
                             android:textSize="13dp" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName6"
+                            android:id="@+id/challengeTeamOwn"
                             android:layout_width="85dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
@@ -224,6 +225,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/rectangle377">
+
+                <ImageView
+                    android:id="@+id/postAChallengeB"
+                    android:layout_width="218dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="350dp"
+                    android:layout_marginStart="90dp"
+                    app:srcCompat="@drawable/group_126" />
 
                 <ScrollView
                     android:layout_width="match_parent"
