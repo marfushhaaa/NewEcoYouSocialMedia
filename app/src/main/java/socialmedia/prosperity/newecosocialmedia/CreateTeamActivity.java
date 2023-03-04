@@ -104,7 +104,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
             editTextBio.requestFocus();
             return;
         }
-        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, teamPlaces);
+        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, teamPlaces, "", 0);
         String teamIdKey = FirebaseDatabase.getInstance().getReference("Teams").push().getKey();
         Log.d(TAG, "mgkey:  " + teamIdKey);
         FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)

@@ -29,6 +29,7 @@ import com.squareup.picasso.Picasso;
 public class HomePageFragment extends Fragment {
     ImageView postButton;
     String postIdKey;
+    TextView name, bio;
     String TAG = "brainfuck";
 
     @Nullable
@@ -37,12 +38,15 @@ public class HomePageFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_fragment_screen, null);
 
         postButton = view.findViewById(R.id.button_post);
+        name = view.findViewById(R.id.challenge_name);
+        bio = view.findViewById(R.id.challenge_info);
 
 //        r = view.findViewById(R.id.post_l);
         Log.d(TAG, "click soon lol");
 
         Log.d(TAG, "click lol");
         ((MainActivity)getActivity()).changeActivity2(postButton);
+        ((MainActivity)getActivity()).showChallenge(name, bio);
 
 //        // we will get the default FirebaseDatabase instance
 //        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();

@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -34,6 +35,8 @@ import java.util.UUID;
 
 public class CreateChallengeActivity extends AppCompatActivity {
     private Uri filePath;
+    DatabaseReference refChallengeAmount;
+    int challengeAmount;
     String teamCreated;
 
     String TAG = "brainfuck";
@@ -68,6 +71,19 @@ public class CreateChallengeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 teamCreated = snapshot.getValue(String.class);
+                DatabaseReference refChallengeAmount = FirebaseDatabase.getInstance().getReference("Teams/")
+                        .child(teamCreated).child("challengeCount");
+                refChallengeAmount.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        challengeAmount = snapshot.getValue(Integer.class);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
             @Override
@@ -75,6 +91,10 @@ public class CreateChallengeActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +174,11 @@ public class CreateChallengeActivity extends AppCompatActivity {
             // Defining the child of storageReference
             StorageReference ref2 = storageReference.child("challenge/"+ challengeIdKey);
             Challenge challenge = new Challenge(name, bio, district, timeForDoing, teamOwnHashtag, challengeIdKey, dateCreation, teamCreated);
+            FirebaseDatabase.getInstance().getReference("Teams/" + teamCreated).child("challengeCount").setValue(challengeAmount+1);
+            String challengeAmountString = String.valueOf(challengeAmount+1);
+            FirebaseDatabase.getInstance().getReference("Teams/"  + teamCreated + "/challenges")
+                    .child(challengeAmountString)
+                    .setValue(challengeIdKey);
             FirebaseDatabase.getInstance().getReference("Challenges/" + challengeIdKey)
                     .setValue(challenge);
             // adding listeners on upload

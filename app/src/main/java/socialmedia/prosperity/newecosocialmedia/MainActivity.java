@@ -1,6 +1,5 @@
 package socialmedia.prosperity.newecosocialmedia;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,15 +9,12 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -28,7 +24,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -52,8 +47,7 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView teamPhoto, addPost, addChallenge, addIdea, postIcon;
-    DatabaseReference database;
-    DatabaseReference database2;
+    DatabaseReference database, database2, db3;
     String receiverTeamId;
     RelativeLayout relativeLayout;
     ScrollView scrollView;
@@ -62,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String TAG = "brainfuck";
     // Uri indicates, where the image will be picked from
     private Uri filePath;
-
+    String challengeId;
     ImageView rImage;
 
     // request code
@@ -71,8 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // instance for firebase storage and StorageReference
     FirebaseStorage storage;
     StorageReference storageReference;
-    String postIdKey;
+    String postIdKey, challengeName, challengeBio;
     int a;
+    String teamIdStr;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -229,6 +224,73 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
+    }
+
+    public void showChallenge(TextView name, TextView bio){
+        DatabaseReference teamId = FirebaseDatabase.getInstance().getReference("Users").
+                child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("team");
+        Log.d(TAG, teamId.toString());
+
+        teamId.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String teamIdStri = snapshot.getValue(String.class);
+                Log.d(TAG, teamIdStri);
+
+                DatabaseReference challenge = FirebaseDatabase.getInstance().getReference("Teams/")
+                        .child(teamIdStri)
+                        .child("challenges")
+                        .child("5");
+                Log.d(TAG, challenge.toString());
+
+                challenge.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String challengeId = snapshot.getValue(String.class);
+                        Log.d(TAG, challengeId);
+
+                        db3 = FirebaseDatabase.getInstance().getReference().child("Challenges")
+                                .child(challengeId);
+                        db3.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                challengeName = snapshot.child("challengeName").getValue(String.class);
+                                Log.d(TAG, challengeName);
+
+                                challengeBio = snapshot.child("challengeBio").getValue(String.class);
+                                Log.d(TAG, challengeBio);
+
+                                name.setText(challengeName);
+                                bio.setText(challengeBio);
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//
+//
+
     }
 
     public void receivedTeamInfo(TextView name, TextView bio, TextView members, TextView dateOfCreation){

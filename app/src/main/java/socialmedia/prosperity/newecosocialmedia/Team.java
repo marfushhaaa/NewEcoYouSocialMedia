@@ -12,6 +12,16 @@ public class Team {
     String membernumber;
     String dateCreated;
 
+    public String getChallenges() {
+        return challenges;
+    }
+
+    public void setChallenges(String challenges) {
+        this.challenges = challenges;
+    }
+
+    String challenges;
+
     public String getTeamPlaces() {
         return teamPlaces;
     }
@@ -30,6 +40,7 @@ public class Team {
     }
 
     public int users;
+    public int challengeCount;
 
     public String getHashtag() {
         return hashtag;
@@ -60,24 +71,18 @@ public class Team {
     Team(){
 
     }
-    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated, String hashtag, String teamPlaces) {
+    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated, String hashtag,
+                String teamPlaces, String challenges, int challengeCount) {
         this.name = name;
         this.bio = bio;
         this.shortBio = shortBio;
         this.membernumber = membernumber;
         this.teamPlaces = teamPlaces;
-//        this.totalMembers = totalMembers;
         this.dateCreated = dateCreated;
         this.hashtag = hashtag;
+        this.challenges = challenges;
+        this.challengeCount = challengeCount;
     }
-//
-//    public String getTotalMembers() {
-//        return totalMembers;
-//    }
-//
-//    public void setTotalMembers(String totalMembers) {
-//        this.totalMembers = totalMembers;
-//    }
 
     public String getDateCreated() {
         return dateCreated;
