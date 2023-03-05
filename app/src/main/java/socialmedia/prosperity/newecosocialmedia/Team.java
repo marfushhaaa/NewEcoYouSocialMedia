@@ -8,7 +8,7 @@ public class Team {
     String bio;
     String shortBio;
     List<String> userList = new ArrayList<String>();
-    String hashtag;
+    String challengeHashtag;
     String membernumber;
     String dateCreated;
 
@@ -42,12 +42,12 @@ public class Team {
     public int users;
     public int challengeCount;
 
-    public String getHashtag() {
-        return hashtag;
+    public String getChallengeHashtag() {
+        return challengeHashtag;
     }
 
-    public void setHashtag(String hashtag) {
-        this.hashtag = hashtag;
+    public void setChallengeHashtag(String challengeHashtag) {
+        this.challengeHashtag = challengeHashtag;
     }
 
     public List<String> getUserList() {
@@ -71,17 +71,17 @@ public class Team {
     Team(){
 
     }
-    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated, String hashtag,
-                String teamPlaces, String challenges, int challengeCount) {
+    public Team(String name, String bio, String shortBio, String membernumber, String dateCreated, String challengeHashtag,
+                String teamPlaces) {
         this.name = name;
         this.bio = bio;
         this.shortBio = shortBio;
         this.membernumber = membernumber;
         this.teamPlaces = teamPlaces;
         this.dateCreated = dateCreated;
-        this.hashtag = hashtag;
-        this.challenges = challenges;
-        this.challengeCount = challengeCount;
+        this.challengeHashtag = challengeHashtag;
+//        this.challenges = challenges;
+//        this.challengeCount = challengeCount;
     }
 
     public String getDateCreated() {

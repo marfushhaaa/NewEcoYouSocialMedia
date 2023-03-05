@@ -173,12 +173,13 @@ public class CreateChallengeActivity extends AppCompatActivity {
 
             // Defining the child of storageReference
             StorageReference ref2 = storageReference.child("challenge/"+ challengeIdKey);
+
             Challenge challenge = new Challenge(name, bio, district, timeForDoing, teamOwnHashtag, challengeIdKey, dateCreation, teamCreated);
-            FirebaseDatabase.getInstance().getReference("Teams/" + teamCreated).child("challengeCount").setValue(challengeAmount+1);
-            String challengeAmountString = String.valueOf(challengeAmount+1);
-            FirebaseDatabase.getInstance().getReference("Teams/"  + teamCreated + "/challenges")
-                    .child(challengeAmountString)
-                    .setValue(challengeIdKey);
+//            FirebaseDatabase.getInstance().getReference("Teams/" + teamCreated).child("challengeCount").setValue(challengeAmount+1);
+//            String challengeAmountString = String.valueOf(challengeAmount+1);
+//            FirebaseDatabase.getInstance().getReference("Teams/"  + teamCreated + "/challenges")
+//                    .child(challengeAmountString)
+//                    .setValue(challengeIdKey);
             FirebaseDatabase.getInstance().getReference("Challenges/" + challengeIdKey)
                     .setValue(challenge);
             // adding listeners on upload

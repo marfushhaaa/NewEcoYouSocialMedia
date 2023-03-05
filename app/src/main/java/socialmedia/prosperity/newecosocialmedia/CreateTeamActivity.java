@@ -77,7 +77,7 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
         String bio = editTextBio.getText().toString().trim();
         String dateCreation = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
         String hashtag = "#" + editTextTeamHash.getText().toString().trim();
-        String teamPlaces = 0 + "/" + editTextMemberNumber.getText().toString().trim();
+        String teamPlaces = 1 + "/" + editTextMemberNumber.getText().toString().trim();
 
 //        String totalMemberNum = "";
 
@@ -104,9 +104,10 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
             editTextBio.requestFocus();
             return;
         }
-        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, teamPlaces, "", 0);
+        Team team = new Team(name, bio, shortBio, memberNum, dateCreation, hashtag, teamPlaces);
         String teamIdKey = FirebaseDatabase.getInstance().getReference("Teams").push().getKey();
         Log.d(TAG, "mgkey:  " + teamIdKey);
+
         FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
                 .setValue(team)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -119,6 +120,11 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
                     FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .child("team")
                             .setValue(teamIdKey);
+                    FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
+                            .child("users").setValue(0);
+                    FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
+                            .child("admin").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
                     Log.d(TAG, "admin_id: " + admin_id);
                      Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

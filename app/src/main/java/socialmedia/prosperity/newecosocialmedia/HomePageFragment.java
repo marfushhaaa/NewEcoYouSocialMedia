@@ -46,7 +46,7 @@ public class HomePageFragment extends Fragment {
 
         Log.d(TAG, "click lol");
         ((MainActivity)getActivity()).changeActivity2(postButton);
-        ((MainActivity)getActivity()).showChallenge(name, bio);
+//        ((MainActivity)getActivity()).showChallenge(name, bio);
 
 //        // we will get the default FirebaseDatabase instance
 //        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();

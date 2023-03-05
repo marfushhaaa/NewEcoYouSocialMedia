@@ -230,63 +230,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DatabaseReference teamId = FirebaseDatabase.getInstance().getReference("Users").
                 child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("team");
         Log.d(TAG, teamId.toString());
+        if(!teamId.toString().equals("no team")){
+            teamId.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String teamIdStri = snapshot.getValue(String.class);
+                    Log.d(TAG, teamIdStri);
 
-        teamId.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String teamIdStri = snapshot.getValue(String.class);
-                Log.d(TAG, teamIdStri);
+                    DatabaseReference challenge = FirebaseDatabase.getInstance().getReference("Teams/")
+                            .child(teamIdStri)
+                            .child("challenges")
+                            .child("5");
+                    Log.d(TAG, challenge.toString());
 
-                DatabaseReference challenge = FirebaseDatabase.getInstance().getReference("Teams/")
-                        .child(teamIdStri)
-                        .child("challenges")
-                        .child("5");
-                Log.d(TAG, challenge.toString());
+                    challenge.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String challengeId = snapshot.getValue(String.class);
+                            Log.d(TAG, challengeId);
 
-                challenge.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String challengeId = snapshot.getValue(String.class);
-                        Log.d(TAG, challengeId);
+                            db3 = FirebaseDatabase.getInstance().getReference().child("Challenges")
+                                    .child(challengeId);
+                            db3.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    challengeName = snapshot.child("challengeName").getValue(String.class);
+                                    Log.d(TAG, challengeName);
 
-                        db3 = FirebaseDatabase.getInstance().getReference().child("Challenges")
-                                .child(challengeId);
-                        db3.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                challengeName = snapshot.child("challengeName").getValue(String.class);
-                                Log.d(TAG, challengeName);
+                                    challengeBio = snapshot.child("challengeBio").getValue(String.class);
+                                    Log.d(TAG, challengeBio);
 
-                                challengeBio = snapshot.child("challengeBio").getValue(String.class);
-                                Log.d(TAG, challengeBio);
+                                    name.setText(challengeName);
+                                    bio.setText(challengeBio);
 
-                                name.setText(challengeName);
-                                bio.setText(challengeBio);
+                                }
 
-                            }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                                }
+                            });
 
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+
+        }
+//        else {
+//            Intent intent = new Intent(MainActivity.this,  SearchTeamActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//            finish();
+//        }
 
 //
 //
@@ -388,13 +396,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
-//    public void showPopup(View v) {
-//        Context wrapper = new ContextThemeWrapper(this, R.style.PopupMenu);
-//        PopupMenu popup = new PopupMenu(wrapper, v);
-//        MenuInflater inflater = popup.getMenuInflater();
-//        inflater.inflate(R.menu.popup_menu, popup.getMenu());
-//        popup.show();
-//    }
+
 
     public void changeActivity2(ImageView button){
         button.setOnClickListener(new View.OnClickListener() {
@@ -467,52 +469,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ;
         }
     }
-
-//    public void post(EditText editTextName, EditText editTextText) {
-//        String name = editTextName.getText().toString().trim();
-//        String text = editTextText.getText().toString().trim();
-//        String dateCreation = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
-//
-////        String totalMemberNum = "";
-//
-//        if (name.isEmpty()) {
-//            editTextName.setError("Write your name!");
-//            editTextName.requestFocus();
-//            return;
-//        }
-//
-//        if (text.isEmpty()) {
-//            editTextText.setError("Write your hashtag!");
-//            editTextText.requestFocus();
-//            return;
-//        }
-//
-//        Post post = new Post(name, text, )
-//
-//        String teamIdKey = FirebaseDatabase.getInstance().getReference("Teams").push().getKey();
-//        Log.d(TAG, "mgkey:  " + teamIdKey);
-//        FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
-//                .setValue(team)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()){
-//                            Intent intent = new Intent(CreateTeamActivity.this,  AdminMainActivity.class);
-//                            intent.putExtra("admin_id", admin_id);
-//                            intent.putExtra("team_id", teamIdKey);
-//                            FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                    .child("team")
-//                                    .setValue(teamIdKey);
-//                            Log.d(TAG, "admin_id: " + admin_id);
-//                            Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
-//                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//                            startActivity(intent);
-//                            finish();
-//                        }else{
-//                            Toast.makeText(getApplicationContext(),"Failed to register!", Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                });
-//
-//    }
 }

@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -56,22 +56,29 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
     }
     @Override
     protected void onStart() {
+        Log.d(TAG, "prep for start");
         super.onStart();
         FirebaseRecyclerOptions<Team> options = new FirebaseRecyclerOptions.Builder<Team>()
                 .setQuery(FirebaseDatabase.getInstance().getReference("/Teams"), Team.class)
                 .build();
-
+        Log.d(TAG, "start1");
         FirebaseRecyclerAdapter<Team, ViewHolder> recyclerAdapter =
                 new FirebaseRecyclerAdapter<Team, ViewHolder>(options) {
+
                     @Override
                     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Team model) {
+                        Log.d(TAG, "start2");
+
                         holder.name.setText(model.getName());
+                        Log.d(TAG, "start3");
+
                         holder.bio.setText(model.getShortBio());
-                        holder.teamHash.setText(model.getHashtag());
+                        holder.teamHash.setText(model.getChallengeHashtag());
                         holder.membernumber.setText(model.getMembernumber());
                         holder.dateCreation.setText(model.getDateCreated());
                         holder.teamPlaces.setText(model.getTeamPlaces());
-                        holder. joinButton.setOnClickListener(new View.OnClickListener() {
+                        Log.d(TAG, "start4");
+                        holder.joinButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 String team_id = getRef(position).getKey();
@@ -82,13 +89,12 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                                 FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users_in_team" + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                FirebaseDatabase.getInstance().getReference("Teams/" + team_id)
-                                        .child("users");
+
                                 FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .child("team")
                                         .setValue(team_id);
                                 team.getUserList().add(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                Intent intent = new Intent(SearchTeamActivity.this,  CreatePostActivity.class);
+                                Intent intent = new Intent(SearchTeamActivity.this,  MainActivity.class);
                                 intent.putExtra("team_id", team_id);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -110,9 +116,8 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
         recyclerAdapter.startListening();
     }
 
+
     private void printChildrenCount(DatabaseReference ref, String team_id){
-
-
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -120,22 +125,26 @@ public class SearchTeamActivity extends AppCompatActivity implements View.OnClic
                     database.child(team_id).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            Log.d(TAG, "snapshot begin: " + database.child(team_id).child("users"));
                             childrenCount = task.getResult().getChildrenCount();
+//                            Log.d(TAG, "team_places: " + snapshot.child("users").getValue().toString());
+                            String test = snapshot.child("bio").getValue(String.class);
+                            Log.d(TAG, "" + test);
                             team_places = snapshot.child("users").getValue().toString();
-                            member_number = snapshot.child("membernumber").getValue().toString();
+                            Log.d(TAG, "team_places: " + team_places);
+                            member_number = snapshot.child("/membernumber").getValue(String.class);
                             team_places_int = Integer.parseInt(team_places);
                             member_number_int = Integer.parseInt(member_number);
-                            if(team_places_int < member_number_int){
-                                FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/users")
-                                        .setValue(childrenCount+1);
-
-                            }
+                            childrenCount = childrenCount +1;
+                            if (team_places_int < member_number_int) {
+                                FirebaseDatabase.getInstance().getReference("Teams/" + team_id + "/users")
+                                        .setValue(childrenCount);}
                             Log.d(TAG, "users: " + team_places);
-//                            team.setMembernumber(member_number);
+                            team.setMembernumber(member_number);
                             team.setTeamPlaces(team_places + "/" + member_number);
                             Log.d(TAG, "memberNumber: " + team.getMembernumber());
                             Log.d(TAG, "member_number: " + member_number);
-                            FirebaseDatabase.getInstance().getReference("Teams/"  + team_id + "/teamPlaces")
+                            FirebaseDatabase.getInstance().getReference("Teams/" + team_id + "/teamPlaces")
                                     .setValue(team_places + "/" + member_number);
 
                         }

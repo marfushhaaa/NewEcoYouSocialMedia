@@ -7,11 +7,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SplashScreen extends AppCompatActivity {
     View registerbutt, loginbutt;
@@ -27,12 +33,36 @@ public class SplashScreen extends AppCompatActivity {
         String login = preferences.getString("remember", "");
         Log.d(TAG, "login: " + login);
 
+        DatabaseReference teamId = FirebaseDatabase.getInstance().getReference("Users").
+                child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("team");
+        teamId.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String teamIdStr = snapshot.getValue(String.class);
+                Log.d(TAG, teamIdStr);
+
+                if(login.equals("true") && teamIdStr.equals("no team")){
+                    Intent intent = new Intent(SplashScreen.this, SearchTeamActivity.class);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    startActivity(intent);
+                }
+                else if(login.equals("true") && !teamIdStr.equals("no team")){
+                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    startActivity(intent);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         //check password
-        if(login.equals("true")){
-            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            startActivity(intent);
-        }
+
 //        else if(login.equals("false")){
 
 ////                    Intent intent = new Intent(SplashScreen.this, SearchTeamActivity.class);
