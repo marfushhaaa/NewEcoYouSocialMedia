@@ -226,80 +226,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
-    public void showChallenge(TextView name, TextView bio){
-        DatabaseReference teamId = FirebaseDatabase.getInstance().getReference("Users").
-                child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("team");
-        Log.d(TAG, teamId.toString());
-        if(!teamId.toString().equals("no team")){
-            teamId.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String teamIdStri = snapshot.getValue(String.class);
-                    Log.d(TAG, teamIdStri);
 
-                    DatabaseReference challenge = FirebaseDatabase.getInstance().getReference("Teams/")
-                            .child(teamIdStri)
-                            .child("challenges")
-                            .child("5");
-                    Log.d(TAG, challenge.toString());
-
-                    challenge.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String challengeId = snapshot.getValue(String.class);
-                            Log.d(TAG, challengeId);
-
-                            db3 = FirebaseDatabase.getInstance().getReference().child("Challenges")
-                                    .child(challengeId);
-                            db3.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    challengeName = snapshot.child("challengeName").getValue(String.class);
-                                    Log.d(TAG, challengeName);
-
-                                    challengeBio = snapshot.child("challengeBio").getValue(String.class);
-                                    Log.d(TAG, challengeBio);
-
-                                    name.setText(challengeName);
-                                    bio.setText(challengeBio);
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-        }
-//        else {
-//            Intent intent = new Intent(MainActivity.this,  SearchTeamActivity.class);
-//            startActivity(intent);
-//            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//            finish();
+//    public void showChallenge(TextView name, TextView bio){
+//        DatabaseReference teamId = FirebaseDatabase.getInstance().getReference("Users").
+//                child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("team");
+//        Log.d(TAG, teamId.toString());
+//        if(!teamId.toString().equals("no team")){
+//            teamId.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    String teamIdStri = snapshot.getValue(String.class);
+//                    Log.d(TAG, teamIdStri);
+//
+//                    DatabaseReference challenge = FirebaseDatabase.getInstance().getReference("Teams/")
+//                            .child(teamIdStri)
+//                            .child("challenges")
+//                            .child("5");
+//                    Log.d(TAG, challenge.toString());
+//
+//                    challenge.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            String challengeId = snapshot.getValue(String.class);
+//                            Log.d(TAG, challengeId);
+//
+//                            db3 = FirebaseDatabase.getInstance().getReference().child("Challenges")
+//                                    .child(challengeId);
+//                            db3.addValueEventListener(new ValueEventListener() {
+//                                @Override
+//                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                    challengeName = snapshot.child("challengeName").getValue(String.class);
+//                                    Log.d(TAG, challengeName);
+//
+//                                    challengeBio = snapshot.child("challengeBio").getValue(String.class);
+//                                    Log.d(TAG, challengeBio);
+//
+//                                    name.setText(challengeName);
+//                                    bio.setText(challengeBio);
+//
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                }
+//                            });
+//
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
+//
 //        }
-
+////        else {
+////            Intent intent = new Intent(MainActivity.this,  SearchTeamActivity.class);
+////            startActivity(intent);
+////            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+////            finish();
+////        }
 //
+////
+////
 //
-
-    }
+//    }
 
     public void receivedTeamInfo(TextView name, TextView bio, TextView members, TextView dateOfCreation){
         database2.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {

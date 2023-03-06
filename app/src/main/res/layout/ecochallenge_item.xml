@@ -3,28 +3,35 @@
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="88dp"
-            android:layout_height="113dp"
-            android:background="@drawable/challenge_background">
+    android:layout_height="wrap_content"
+    android:layout_width="100dp">
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="14dp"
-                android:fontFamily="@font/lato_bold"
-                android:text="Назва ідеї"
-                android:textAllCaps="false"
-                android:textColor="#1E5128"
-                android:textSize="11sp" />
+    <RelativeLayout
+        android:layout_width="88dp"
+        android:layout_height="113dp"
+        android:background="@drawable/challenge_background">
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/ecochallenge_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="9dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Назва челенжу"
+        android:textAllCaps="false"
+        android:textColor="#1E5128"
+        android:textSize="10sp" />
 
             <ImageView
-                android:id="@+id/imageView28"
+                android:id="@+id/ecochallenge_photo"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_below="@+id/textView6"
+                android:layout_below="@+id/ecochallenge_name"
                 android:layout_marginStart="9dp"
                 android:layout_marginTop="6dp"
                 app:srcCompat="@drawable/idea_photo" />
-        </RelativeLayout>
+
+</RelativeLayout>

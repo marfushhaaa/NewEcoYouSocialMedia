@@ -1,10 +1,12 @@
 package socialmedia.prosperity.newecosocialmedia;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +35,11 @@ public class HomePageFragment extends Fragment {
     String postIdKey;
     TextView name, bio;
     String TAG = "brainfuck";
+    RecyclerView recyclerView;
+    FirebaseStorage storage;
+
+    StorageReference storageReference;
+    DatabaseReference database;
 
     @Nullable
     @Override
@@ -41,108 +50,68 @@ public class HomePageFragment extends Fragment {
         name = view.findViewById(R.id.challenge_name);
         bio = view.findViewById(R.id.challenge_info);
 
+        database = FirebaseDatabase.getInstance().getReference().child("Challenges");
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        recyclerView = view.findViewById(R.id.recycler_view_ecochallenges);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
 //        r = view.findViewById(R.id.post_l);
         Log.d(TAG, "click soon lol");
 
         Log.d(TAG, "click lol");
         ((MainActivity)getActivity()).changeActivity2(postButton);
-//        ((MainActivity)getActivity()).showChallenge(name, bio);
 
-//        // we will get the default FirebaseDatabase instance
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//
-//        // we will get a DatabaseReference for the database
-//        // root node
-//        DatabaseReference databaseReference = firebaseDatabase.getReference();
-//
-//        DatabaseReference getImage = databaseReference.child("image");
-//        postsRef = FirebaseDatabase.getInstance().getReference("/Posts");
-//        postIdKey = ((MainActivity)getActivity()).postIdKey;
-//        postsRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(postIdKey);
-//        storage = FirebaseStorage.getInstance();
-//        storageReference = storage.getReference();
-//        storageReference = storageReference.child("post/"+ postIdKey);
-//        Log.d(TAG, "post_ref: " + storageReference.toString());
-
-
-//        if(((MainActivity)getActivity()).a != 0){
-//
-//        }
-
-//        postsView = view.findViewById(R.id.recycler_view_posts);
-//        postsView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }
-//    public void onStart(){
-//        super.onStart();
-//        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-//                .setQuery(FirebaseDatabase.getInstance().getReference("/Posts"), Post.class)
-//                .build();
-//        FirebaseRecyclerAdapter<Post, PostsViewHolder> adapter =
-//                new FirebaseRecyclerAdapter<Post, PostsViewHolder>(options) {
-//            @Override
-//            protected void onBindViewHolder(@NonNull PostsViewHolder holder, int position, @NonNull Post model) {
-////                String postId = getRef(position).getKey();
-//                holder.postName.setText(model.getName());
-//                holder.postText.setText(model.getText());
-//                String postImage = storageReference.toString();
-//                Log.d(TAG, "post: " + postImage);
-//
-//
-//                Picasso.get().load(postImage).into(holder.postImg);
-//                postsRef.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//
-////                FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
-////                    @Override
-////                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-////                        if(snapshot.hasChild("Posts")){
-////                            String
-////                        }
-////                    }
-////
-////                    @Override
-////                    public void onCancelled(@NonNull DatabaseError error) {
-////
-////                    }
-////                })
-//            }
-//
-//            @NonNull
-//            @Override
-//            public PostsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//
-//                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.team_post_item, parent, false);
-//                PostsViewHolder postsViewHolder = new PostsViewHolder(view);
-//                return postsViewHolder;
-//            }
-//        };
-//
-//        postsView.setAdapter(adapter);
-//        adapter.startListening();
-//    }
 
-//    public static class PostsViewHolder extends RecyclerView.ViewHolder{
-//
-//        TextView postName, postText;
-//        ImageView postImg;
-//        public PostsViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//            postName = itemView.findViewById(R.id.post_name);
-//            postImg = itemView.findViewById(R.id.post_image);
-//            postText = itemView.findViewById(R.id.post_text);
-//
-//        }
-//    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseRecyclerOptions<Challenge> options = new FirebaseRecyclerOptions.Builder<Challenge>()
+                .setQuery(FirebaseDatabase.getInstance().getReference("/Challenges"), Challenge.class)
+                .build();
+
+        FirebaseRecyclerAdapter<Challenge, ViewHolder> recyclerAdapter =
+                new FirebaseRecyclerAdapter<Challenge, ViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Challenge model) {
+                        holder.name.setText(model.getChallengeName());
+                        storageReference.child("challenge/" + model.getChallengePhotoLink()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Picasso.get().load(uri).into(holder.image);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
+
+                    }
+
+                    @NonNull
+                    @Override
+                    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ecochallenge_item, parent, false);
+                        ViewHolder viewHolder = new ViewHolder(view);
+                        return viewHolder;
+                    }
+                };
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerAdapter.startListening();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+        TextView name;
+        ImageView image;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            name = itemView.findViewById(R.id.ecochallenge_name);
+            image = itemView.findViewById(R.id.ecochallenge_photo);
+        }
+    }
 
 
 
