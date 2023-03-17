@@ -77,6 +77,7 @@ public class HomePageFragment extends Fragment {
                     @Override
                     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Challenge model) {
                         holder.name.setText(model.getChallengeName());
+
                         storageReference.child("challenge/" + model.getChallengePhotoLink()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {

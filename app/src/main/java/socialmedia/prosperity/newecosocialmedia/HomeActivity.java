@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     StorageReference storageReference;
     DatabaseReference database;
     ImageView back;
+    RelativeLayout rl;
     @Override
     public void onBackPressed() {
 
@@ -47,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view_posts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        rl = findViewById(R.id.rl2);
 
         back = findViewById(R.id.back_button_posts);
         back.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +95,13 @@ public class HomeActivity extends AppCompatActivity {
                                 // Handle any errors
                             }
                         });
+                        holder.imageBgr.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                onButtonShowPopupWindowClick(rl);
+                                //load a popup window
+                            }
+                        });
 
                     }
 
@@ -103,15 +116,46 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(recyclerAdapter);
         recyclerAdapter.startListening();
     }
+    public void onButtonShowPopupWindowClick(View view) {
 
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window_post, null);
+
+        // create the popup window
+        int width = RelativeLayout.LayoutParams.MATCH_PARENT;
+        int height = RelativeLayout.LayoutParams.MATCH_PARENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+
+
+
+//        ImageView addChallenge = popupView.findViewById(R.id.);
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+
+
+    }
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView name, bio;
-        ImageView image;
+        ImageView image, imageBgr;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.post_name);
             bio = itemView.findViewById(R.id.post_text);
             image = itemView.findViewById(R.id.post_image);
+            imageBgr = itemView.findViewById(R.id.post_background);
         }
     }
 }

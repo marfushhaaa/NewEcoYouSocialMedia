@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
         team_id = "";
+
 //        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
 //        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -101,6 +103,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.login_button:
@@ -121,38 +129,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
-        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                team_id = snapshot.child("team").getValue().toString();
-                Log.d(TAG, "team: " + team_id);
+        FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
+        if(mFirebaseUser != null) {
+            databaseReference.child(mFirebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Log.d(TAG, "user: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    Log.d(TAG, "team: " + snapshot.child("team").getValue().toString());
 
-                SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
-                String login = preferences.getString("remember", "");
-                Log.d(TAG, "login: " + login);
+                    team_id = snapshot.child("team").getValue().toString();
+                    Log.d(TAG, "user: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                //check password
-                if(login.equals("true") && !team_id.equals("no team")){
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    startActivity(intent);
-                }else if(login.equals("false")){
-                    Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    startActivity(intent);
-                    Toast.makeText(LoginActivity.this,"Please, sign in", Toast.LENGTH_LONG).show();
-                }else if(login.equals("true") && team_id.equals("no team")){
-                    Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    startActivity(intent);
+
+                    SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+                    String login = preferences.getString("remember", "");
+                    Log.d(TAG, "login: " + login);
+
+                    //check password
+                    if(login.equals("true") && !team_id.equals("no team")){
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        startActivity(intent);
+                    }else if(login.equals("false")){
+                        Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        startActivity(intent);
+                        Toast.makeText(LoginActivity.this,"Please, sign in", Toast.LENGTH_LONG).show();
+                    }else if(login.equals("true") && team_id.equals("no team")){
+                        Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        startActivity(intent);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+
+
+        }
 
 //        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
 //        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {

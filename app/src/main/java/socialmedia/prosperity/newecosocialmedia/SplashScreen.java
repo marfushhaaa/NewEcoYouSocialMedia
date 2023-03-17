@@ -29,37 +29,37 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
-        String login = preferences.getString("remember", "");
-        Log.d(TAG, "login: " + login);
-
-        DatabaseReference teamId = FirebaseDatabase.getInstance().getReference("Users").
-                child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("team");
-        teamId.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String teamIdStr = snapshot.getValue(String.class);
-                Log.d(TAG, teamIdStr);
-
-                if(login.equals("true") && teamIdStr.equals("no team")){
-                    Intent intent = new Intent(SplashScreen.this, SearchTeamActivity.class);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    startActivity(intent);
-                }
-                else if(login.equals("true") && !teamIdStr.equals("no team")){
-                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    startActivity(intent);
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+//        String login = preferences.getString("remember", "");
+//        Log.d(TAG, "login: " + login);
+//
+//        DatabaseReference teamId = FirebaseDatabase.getInstance().getReference("Users").
+//                child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("team");
+//        teamId.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String teamIdStr = snapshot.getValue(String.class);
+//                Log.d(TAG, teamIdStr);
+//
+//                if(login.equals("true") && teamIdStr.equals("no team")){
+//                    Intent intent = new Intent(SplashScreen.this, SearchTeamActivity.class);
+//                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                    startActivity(intent);
+//                }
+//                else if(login.equals("true") && !teamIdStr.equals("no team")){
+//                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+//                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                    startActivity(intent);
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         //check password
 
