@@ -141,14 +141,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     team_id = snapshot.child("team").getValue().toString();
                     Log.d(TAG, "user: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-
                     SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                     String login = preferences.getString("remember", "");
                     Log.d(TAG, "login: " + login);
 
                     //check password
                     if (login.equals("true") && !team_id.equals("no team")) {
+                        SaveSharedPreference.setUserName(LoginActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        Log.d(TAG, "logged in");
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         startActivity(intent);

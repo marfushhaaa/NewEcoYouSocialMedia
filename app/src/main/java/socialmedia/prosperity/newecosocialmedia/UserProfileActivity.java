@@ -26,6 +26,7 @@ public class UserProfileActivity extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SaveSharedPreference.setUserName(((MainActivity)getActivity()), "");
                 ((MainActivity)getActivity()).logOut();
             }
         });

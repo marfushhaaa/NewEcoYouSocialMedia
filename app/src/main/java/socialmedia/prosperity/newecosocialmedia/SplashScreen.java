@@ -28,6 +28,12 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+        if(SaveSharedPreference.getUserName(SplashScreen.this).length() > 0){
+            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            finish();
+        }
 
 //        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
 //        String login = preferences.getString("remember", "");
