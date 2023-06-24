@@ -1,5 +1,6 @@
 package socialmedia.prosperity.newecosocialmedia;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String postIdKey, challengeName, challengeBio;
     int a;
     String teamIdStr;
+    private static final int TIME_BACK_PRESSED_INTERVAL = 2000;
+    private long backPressed;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         database = FirebaseDatabase.getInstance().getReference().child("Teams");
 
+
         mAuth = FirebaseAuth.getInstance();
 
 //        relativeLayout = findViewById(R.id.create_window);
@@ -162,6 +166,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        if(backPressed + TIME_BACK_PRESSED_INTERVAL > System.currentTimeMillis()){
+            super.onBackPressed();
+            finishAffinity();
+            return;
+        }
+        else{
+            Toast.makeText(getBaseContext(), "Натисніть знову аби вийти", Toast.LENGTH_LONG).show();
+        }
+        backPressed = System.currentTimeMillis();
 
     }
     public void onButtonShowPopupWindowClick(View view) {

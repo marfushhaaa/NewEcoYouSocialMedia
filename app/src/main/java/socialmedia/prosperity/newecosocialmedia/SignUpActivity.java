@@ -248,9 +248,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     }
                                 }
                             });
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Failed to register!", Toast.LENGTH_LONG).show();
                         }
+//                        else{
+//                            Toast.makeText(getApplicationContext(),"Failed to register!", Toast.LENGTH_LONG).show();
+//                        }
                     }
                 });
     }

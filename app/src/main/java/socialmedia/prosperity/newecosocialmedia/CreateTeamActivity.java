@@ -58,13 +58,13 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
                 registerTeam();
                 break;
             case (R.id.back_button_team):
-                 back();
-                 break;
+                back();
+                break;
         }
     }
 
-    private void back(){
-        Intent intent = new Intent(CreateTeamActivity.this,  SearchTeamActivity.class);
+    private void back() {
+        Intent intent = new Intent(CreateTeamActivity.this, SearchTeamActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
@@ -111,30 +111,30 @@ public class CreateTeamActivity extends AppCompatActivity implements View.OnClic
         FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
                 .setValue(team)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Intent intent = new Intent(CreateTeamActivity.this,  MainActivity.class);
-                    intent.putExtra("admin_id", admin_id);
-                    intent.putExtra("team_id", teamIdKey);
-                    FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .child("team")
-                            .setValue(teamIdKey);
-                    FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
-                            .child("users").setValue(0);
-                    FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
-                            .child("admin").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(CreateTeamActivity.this, MainActivity.class);
+                            intent.putExtra("admin_id", admin_id);
+                            intent.putExtra("team_id", teamIdKey);
+                            FirebaseDatabase.getInstance().getReference("Users/" + FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child("team")
+                                    .setValue(teamIdKey);
+                            FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
+                                    .child("users").setValue(0);
+                            FirebaseDatabase.getInstance().getReference("Teams/" + teamIdKey)
+                                    .child("admin").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                    Log.d(TAG, "admin_id: " + admin_id);
-                     Toast.makeText(getApplicationContext(),"This team has been registered", Toast.LENGTH_LONG).show();
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    startActivity(intent);
-                                        finish();
-                                    }else{
-                                        Toast.makeText(getApplicationContext(),"Failed to register!", Toast.LENGTH_LONG).show();
-                                    }
-            }
-        });
+                            Log.d(TAG, "admin_id: " + admin_id);
+                            Toast.makeText(getApplicationContext(), "This team has been registered", Toast.LENGTH_LONG).show();
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Failed to register!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
     }
 }

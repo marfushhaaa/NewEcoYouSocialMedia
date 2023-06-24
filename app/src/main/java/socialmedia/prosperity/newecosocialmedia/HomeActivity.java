@@ -39,10 +39,12 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference database;
     ImageView back;
     RelativeLayout rl;
+
     @Override
     public void onBackPressed() {
 
     }
+
     String TAG = "brainfuck";
 
     @Override
@@ -58,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,  MainActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -71,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -116,10 +119,11 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(recyclerAdapter);
         recyclerAdapter.startListening();
     }
+
     public void onButtonShowPopupWindowClick(View view) {
 
         // inflate the layout of the popup window
-        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_window_post, null);
 
         // create the popup window
@@ -128,8 +132,6 @@ public class HomeActivity extends AppCompatActivity {
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-
 
 
 //        ImageView addChallenge = popupView.findViewById(R.id.);
@@ -147,9 +149,11 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, bio;
         ImageView image, imageBgr;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.post_name);

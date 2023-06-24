@@ -138,43 +138,49 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radioButton2"
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@drawable/square"
-                    android:buttonTint="#4E9F3D"
-                    android:fontFamily="@font/lato_regular"
-                    android:text="   Так (1 б.)"
-                    android:textColor="#1E5128"
-                    android:textSize="12sp"
-                    android:visibility="visible" />
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:button="@drawable/square"
-                    android:buttonTint="#4E9F3D"
-                    android:fontFamily="@font/lato_regular"
-                    android:text="   Ні (0 б.)"
-                    android:textColor="#1E5128"
-                    android:textSize="12sp"
-                    android:visibility="visible" />
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/radiobutton"
+                        android:buttonTint="#4E9F3D"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="   Так (1 б.)"
+                        android:textColor="#1E5128"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
 
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:button="@drawable/square"
-                    android:buttonTint="#4E9F3D"
-                    android:fontFamily="@font/lato_regular"
-                    android:text="   Не зовсім (0,5 б.)"
-                    android:textColor="#1E5128"
-                    android:textSize="12sp"
-                    android:visibility="visible" />
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:button="@drawable/radiobutton"
+                        android:buttonTint="#4E9F3D"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="   Ні (0 б.)"
+                        android:textColor="#1E5128"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:button="@drawable/radiobutton"
+                        android:buttonTint="#4E9F3D"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="   Не зовсім (0,5 б.)"
+                        android:textColor="#1E5128"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+                </RadioGroup>
 
             </LinearLayout>
 

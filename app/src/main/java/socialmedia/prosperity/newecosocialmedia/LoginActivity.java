@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.login_button:
                 userLogin();
                 break;
@@ -119,18 +119,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-    private void back(){
-        Intent intent = new Intent(LoginActivity.this,  SplashScreen.class);
+
+    private void back() {
+        Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
+
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
         FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
-        if(mFirebaseUser != null) {
+        if (mFirebaseUser != null) {
             databaseReference.child(mFirebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -146,16 +148,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d(TAG, "login: " + login);
 
                     //check password
-                    if(login.equals("true") && !team_id.equals("no team")){
+                    if (login.equals("true") && !team_id.equals("no team")) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         startActivity(intent);
-                    }else if(login.equals("false")){
-                        Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                        startActivity(intent);
-                        Toast.makeText(LoginActivity.this,"Please, sign in", Toast.LENGTH_LONG).show();
-                    }else if(login.equals("true") && team_id.equals("no team")){
+                    } else if (login.equals("false")) {
+                        Toast.makeText(LoginActivity.this, "Please, sign in", Toast.LENGTH_LONG).show();
+                    } else if (login.equals("true") && team_id.equals("no team")) {
                         Intent intent = new Intent(LoginActivity.this, SearchTeamActivity.class);
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         startActivity(intent);
@@ -183,22 +182,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //
 //            }
 //        });
-        if (email.isEmpty()){
+        if (email.isEmpty()) {
             editTextEmail.setError("Напиши свій імейл!");
             editTextEmail.requestFocus();
             return;
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editTextEmail.setError("Write your email correctly!");
             editTextEmail.requestFocus();
             return;
         }
-        if (password.isEmpty()){
+        if (password.isEmpty()) {
             editTextPassword.setError("Напиши свій пароль");
             editTextPassword.requestFocus();
             return;
         }
-        if (password.length() < 6){
+        if (password.length() < 6) {
             editTextPassword.setError("Пароль має бути від 6 символів");
             editTextPassword.requestFocus();
             return;
@@ -207,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     //redirect to user profile
                     SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
@@ -216,13 +215,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     startActivity(new Intent(LoginActivity.this, SearchTeamActivity.class));
-                    Toast.makeText(getApplicationContext(),"User has been logged in!, checked", Toast.LENGTH_LONG).show();
-                }else{
+                    Toast.makeText(getApplicationContext(), "User has been logged in!", Toast.LENGTH_LONG).show();
+                } else {
                     SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("remember", "false");
                     editor.apply();
-                    Toast.makeText(LoginActivity.this,"Failed to login!, unchecked", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Failed to login!", Toast.LENGTH_LONG).show();
                 }
             }
         });
