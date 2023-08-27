@@ -49,6 +49,9 @@
         <activity android:name=".CreateChallengeActivity"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".CreateIdeaActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 

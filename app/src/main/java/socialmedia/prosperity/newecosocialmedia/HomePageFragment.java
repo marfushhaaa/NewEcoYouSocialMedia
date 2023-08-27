@@ -6,9 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,11 +19,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -35,11 +30,11 @@ public class HomePageFragment extends Fragment {
     String postIdKey;
     TextView name, bio;
     String TAG = "brainfuck";
-    RecyclerView recyclerView;
+    RecyclerView challengeRecyclerView, ideaRecyclerView;
     FirebaseStorage storage;
 
     StorageReference storageReference;
-    DatabaseReference database;
+    DatabaseReference challengeDatabase, ideaDatabase;
 
     @Nullable
     @Override
@@ -50,15 +45,21 @@ public class HomePageFragment extends Fragment {
         name = view.findViewById(R.id.challenge_name);
         bio = view.findViewById(R.id.challenge_info);
 
-        database = FirebaseDatabase.getInstance().getReference().child("Challenges");
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-        recyclerView = view.findViewById(R.id.recycler_view_ecochallenges);
+
+        //challenges
+        challengeDatabase = FirebaseDatabase.getInstance().getReference().child("Challenges");
+        challengeRecyclerView = view.findViewById(R.id.recycler_view_ecochallenges);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-//        r = view.findViewById(R.id.post_l);
+        challengeRecyclerView.setLayoutManager(linearLayoutManager);
         Log.d(TAG, "click soon lol");
 
+        //ideas
+        ideaDatabase = FirebaseDatabase.getInstance().getReference().child("Ideas");
+        ideaRecyclerView = view.findViewById(R.id.recycler_view_ecoideas);
+        LinearLayoutManager idealinearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        ideaRecyclerView.setLayoutManager(idealinearLayoutManager);
         Log.d(TAG, "click lol");
         ((MainActivity)getActivity()).changeActivity2(postButton);
 
@@ -71,11 +72,14 @@ public class HomePageFragment extends Fragment {
         FirebaseRecyclerOptions<Challenge> options = new FirebaseRecyclerOptions.Builder<Challenge>()
                 .setQuery(FirebaseDatabase.getInstance().getReference("/Challenges"), Challenge.class)
                 .build();
+        FirebaseRecyclerOptions<Idea> options2 = new FirebaseRecyclerOptions.Builder<Idea>()
+                .setQuery(FirebaseDatabase.getInstance().getReference("/Ideas"), Idea.class)
+                .build();
 
-        FirebaseRecyclerAdapter<Challenge, ViewHolder> recyclerAdapter =
-                new FirebaseRecyclerAdapter<Challenge, ViewHolder>(options) {
+        FirebaseRecyclerAdapter<Challenge, challegeViewHolder> challengesRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Challenge, challegeViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Challenge model) {
+                    protected void onBindViewHolder(@NonNull challegeViewHolder holder, int position, @NonNull Challenge model) {
                         holder.name.setText(model.getChallengeName());
 
                         storageReference.child("challenge/" + model.getChallengePhotoLink()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -94,20 +98,62 @@ public class HomePageFragment extends Fragment {
 
                     @NonNull
                     @Override
-                    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    public challegeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ecochallenge_item, parent, false);
-                        ViewHolder viewHolder = new ViewHolder(view);
-                        return viewHolder;
+                        challegeViewHolder challegeViewHolder = new challegeViewHolder(view);
+                        return challegeViewHolder;
                     }
                 };
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerAdapter.startListening();
+
+        FirebaseRecyclerAdapter<Idea, ideasViewHolder> ideasRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Idea, ideasViewHolder>(options2) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull ideasViewHolder holder, int position, @NonNull Idea model) {
+                        holder.name.setText(model.getName());
+
+                        storageReference.child("ideas/" + model.getPhotoLink()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Picasso.get().load(uri).into(holder.image);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
+
+                    }
+
+                    @NonNull
+                    @Override
+                    public ideasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ecochallenge_item, parent, false);
+                        ideasViewHolder ideasViewHolder = new ideasViewHolder(view);
+                        return ideasViewHolder;
+                    }
+                };
+
+        challengeRecyclerView.setAdapter(challengesRecyclerAdapter);
+        challengesRecyclerAdapter.startListening();
+
+        ideaRecyclerView.setAdapter(ideasRecyclerAdapter);
+        ideasRecyclerAdapter.startListening();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class challegeViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         ImageView image;
-        public ViewHolder(@NonNull View itemView) {
+        public challegeViewHolder(@NonNull View itemView) {
+            super(itemView);
+            name = itemView.findViewById(R.id.ecochallenge_name);
+            image = itemView.findViewById(R.id.ecochallenge_photo);
+        }
+    }
+    public static class ideasViewHolder extends RecyclerView.ViewHolder{
+        TextView name;
+        ImageView image;
+        public ideasViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.ecochallenge_name);
             image = itemView.findViewById(R.id.ecochallenge_photo);

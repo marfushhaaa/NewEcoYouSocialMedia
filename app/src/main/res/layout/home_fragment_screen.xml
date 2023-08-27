@@ -90,13 +90,12 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-2dp"
                 android:orientation="horizontal">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_ecoideas"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="113dp"
                     android:orientation="horizontal" />
             </RelativeLayout>
         </ScrollView>
