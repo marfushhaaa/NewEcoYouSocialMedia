@@ -7,13 +7,15 @@
     android:background="@color/white">
 
     <RelativeLayout
+        android:id="@+id/rl3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp">
+
         <ScrollView
             android:id="@+id/scroll_view_teamposts"
             android:layout_width="match_parent"
-            android:layout_height="413dp"
-            android:layout_marginTop="230dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +23,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
