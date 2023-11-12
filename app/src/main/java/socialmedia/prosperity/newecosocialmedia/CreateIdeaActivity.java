@@ -28,6 +28,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
+import socialmedia.prosperity.newecosocialmedia.Objects.Idea;
+
 public class CreateIdeaActivity extends AppCompatActivity {
     ImageView back_button, post_button, addImage_button, postIcon;
     ScrollView scrollView;

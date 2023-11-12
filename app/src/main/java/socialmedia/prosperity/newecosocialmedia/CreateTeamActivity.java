@@ -22,6 +22,8 @@ import java.util.Locale;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import socialmedia.prosperity.newecosocialmedia.Objects.Team;
+
 public class CreateTeamActivity extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth mAuth;
     EditText editTextName, editTextMemberNumber, editTextBio, editTextShortBio, editTextTeamHash;

@@ -25,6 +25,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import socialmedia.prosperity.newecosocialmedia.Objects.Challenge;
+import socialmedia.prosperity.newecosocialmedia.Objects.Idea;
+
 public class HomePageFragment extends Fragment {
     ImageView postButton;
     String postIdKey;

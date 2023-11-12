@@ -1,6 +1,5 @@
 package socialmedia.prosperity.newecosocialmedia;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -45,6 +44,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
+
+import socialmedia.prosperity.newecosocialmedia.Objects.Post;
+import socialmedia.prosperity.newecosocialmedia.Objects.Team;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView teamPhoto, addPost, addChallenge, addIdea, postIcon;

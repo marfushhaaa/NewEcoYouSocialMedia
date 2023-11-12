@@ -1,4 +1,4 @@
-package socialmedia.prosperity.newecosocialmedia;
+package socialmedia.prosperity.newecosocialmedia.Objects;
 
 public class Post {
     public Post() {

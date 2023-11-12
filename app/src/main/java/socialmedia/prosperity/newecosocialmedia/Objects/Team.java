@@ -1,4 +1,4 @@
-package socialmedia.prosperity.newecosocialmedia;
+package socialmedia.prosperity.newecosocialmedia.Objects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class Team {
 //        this.totalMemberNumber = totalMemberNumber;
 //    }
 
-    Team(){
+    public Team(){
 
     }
     public Team(String name, String bio, String shortBio, String membernumber, String dateCreated, String challengeHashtag,

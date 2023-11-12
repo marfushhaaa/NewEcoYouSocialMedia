@@ -15,18 +15,26 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.anstrontechnologies.corehelper.AnstronCoreHelper;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.iceteck.silicompressorr.FileUtils;
+import com.iceteck.silicompressorr.SiliCompressor;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
+
+import socialmedia.prosperity.newecosocialmedia.Objects.Post;
 
 public class CreatePostActivity extends AppCompatActivity {
     ImageView back_button, post_button, addImage_button, postIcon;
@@ -40,6 +48,8 @@ public class CreatePostActivity extends AppCompatActivity {
     StorageReference storageReference;
     FirebaseAuth mAuth;
     String postIdKey;
+    AnstronCoreHelper coreHelper;
+    byte[] bytes = new byte[0];
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +65,8 @@ public class CreatePostActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         postIcon = findViewById(R.id.post_img);
         postIdKey = UUID.randomUUID().toString();
+
+//        coreHelper = new AnstronCoreHelper(this);
 
 
         post_button.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +103,31 @@ public class CreatePostActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Image from here..."), PICK_IMAGE_REQUEST);
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // checking request code and result code
+        // if request code is PICK_IMAGE_REQUEST and resultCode is RESULT_OK
+        // then set image in the image view
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Get the Uri of data
+            filePath = data.getData();
+            try {
+                // Setting image on image view using Bitmap
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+                bytes = byteArrayOutputStream.toByteArray();
+                postIcon.setImageBitmap(bitmap);
+            }
+
+            catch (IOException e) {
+                // Log the exception
+                e.printStackTrace();
+            }
+        }
+    }
     public void uploadImage(EditText editTextName, EditText editTextText) {
         String name = editTextName.getText().toString().trim();
         String text = editTextText.getText().toString().trim();
@@ -117,7 +153,7 @@ public class CreatePostActivity extends AppCompatActivity {
                     .setValue(post);
             // adding listeners on upload
             // or failure of image
-            ref.putFile(filePath)
+            ref.putBytes(bytes)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -131,28 +167,7 @@ public class CreatePostActivity extends AppCompatActivity {
         }
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // checking request code and result code
-        // if request code is PICK_IMAGE_REQUEST and resultCode is RESULT_OK
-        // then set image in the image view
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            // Get the Uri of data
-            filePath = data.getData();
-            try {
-                // Setting image on image view using Bitmap
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                postIcon.setImageBitmap(bitmap);
-            }
-
-            catch (IOException e) {
-                // Log the exception
-                e.printStackTrace();
-            }
-        }
-    }
     private void changeActivity(){
         Intent intent = new Intent(CreatePostActivity.this,  MainActivity.class);
         intent.putExtra("postIdKey", postIdKey);

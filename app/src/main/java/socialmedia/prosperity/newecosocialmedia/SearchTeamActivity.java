@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import socialmedia.prosperity.newecosocialmedia.Objects.Team;
+
 public class SearchTeamActivity extends AppCompatActivity implements View.OnClickListener {
     View createATeamButton;
     RecyclerView recyclerView;
